@@ -8,6 +8,6 @@ recopilar lo que les pasa día a día y que estos puedan puntuar sus estados o "
 ```
 
 ## Planificación
-- v0.1.0 -> estructura básica del proyecto
+- [:white_check_mark:] v0.1.0 -> estructura básica del proyecto
 - v0.2.0 -> landing page y login
 - v0.3.0 -> dashborad de moods
