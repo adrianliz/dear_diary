@@ -1,5 +1,38 @@
 {% extends "diary/base.html" %}
+{% load static %}
 
 {% block content %}
-<h1>Hola {{username}}</h1>
+<nav class="navbar navbar-dark bg-primary">
+  <a class="navbar-brand" href="">
+    <img src="{% static 'diary/img/logo.png' %}" width="35" height="35" alt="logo" loading="lazy">
+    <span class="font-weight-bold ml-2">Dear Diary</span>
+  </a>
+</nav>
+
+<div class="container mx-auto">
+  <div class="row row-cols-1 row-cols-md-2">
+    {% for mood in moods %}
+    <div class="col my-5">
+      <div class="card h-100 shadow bg-white rounded">
+        <div class="card-body">
+          <h1 class="card-title display-4 mb-4">{{mood.name}}<i class="ml-2 far fa-bookmark"></i></h5>
+          <h5>Description <i class="ml-2 fas fa-feather"></i></h5>
+          <hr class="m-0"/>
+          <p class="card-title">{{mood.description}}</p>
+          <p class="card-text">
+            {% with ''|center:mood.score as range %}
+            {% for _ in range %}
+            <i class="far fa-smile-beam"></i>
+            {% endfor %}
+            {% endwith %}
+          </p>
+          <p class="card-text">
+            <small class="text-muted">Last updated {{ mood.created_on | date:"d/m/Y H:i" }}</small>
+          </p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}

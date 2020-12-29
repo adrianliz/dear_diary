@@ -12,4 +12,7 @@ recopilar lo que les pasa día a día y que estos puedan puntuar sus estados o "
 - [:white_check_mark:] v0.2.0 -> landing page y página de registro
 ![v0.2.0_landing](screenshots/v0.2.0_landing.png)
 ![v0.2.0_registro](screenshots/v0.2.0_singup.png)
-- v0.3.0 -> dashborad de moods
+- [:white_check_mark:] v0.3.0 -> modelo de mood y dashborad de moods
+![v0.3.0](screenshots/v0.3.0.png)
+- v0.4.0 -> logout
+- v0.4.0 -> CRUD de moods
