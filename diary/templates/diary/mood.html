@@ -1,0 +1,22 @@
+{% extends "diary/core/base.html" %}
+
+{% block content %}
+{% include 'diary/core/navbar.html' %}
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-6 mx-auto">
+      <h1 class="text-center">How it's going? <i class="ml-2 far fa-lightbulb"></i></h1>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-6 mx-auto">
+      {% include 'diary/core/form.html' %}
+    </div>
+  </div>
+
+  <div class="text-center font-weight-bold mt-3">
+    <a href="{% url 'diary:dashboard' %}" class="text-decoration-none">Go back</a>
+  </div>
+</div>
+{% endblock %}

@@ -1,13 +1,12 @@
-{% extends "diary/base.html" %}
+{% extends "diary/core/base.html" %}
 {% load static %}
 
 {% block content %}
-<nav class="navbar navbar-dark bg-primary">
-  <a class="navbar-brand" href="">
-    <img src="{% static 'diary/img/logo.png' %}" width="35" height="35" alt="logo" loading="lazy">
-    <span class="font-weight-bold ml-2">Dear Diary</span>
-  </a>
-</nav>
+{% include 'diary/core/navbar.html' %}
+
+<div class="div text-right mt-3 mr-3">
+  <a type="button" class="btn btn-primary" href="{% url 'diary:logout' %}">Logout</a>
+</div>
 
 <div class="container mx-auto">
   <div class="row row-cols-1 row-cols-md-2">
@@ -15,9 +14,12 @@
     <div class="col my-5">
       <div class="card h-100 shadow bg-white rounded">
         <div class="card-body">
-          <h1 class="card-title display-4 mb-4">{{mood.name}}<i class="ml-2 far fa-bookmark"></i></h5>
+          <h1 class="card-title display-4 mb-4">
+            <i class="ml-2 far fa-bookmark"></i>
+            {{mood.name}}
+          </h1>
           <h5>Description <i class="ml-2 fas fa-feather"></i></h5>
-          <hr class="m-0"/>
+          <hr class="m-0" />
           <p class="card-title">{{mood.description}}</p>
           <p class="card-text">
             {% with ''|center:mood.score as range %}
@@ -26,8 +28,14 @@
             {% endfor %}
             {% endwith %}
           </p>
+          <div class="row flex-row-reverse">
+            <form method="POST" action="{% url 'diary:delete' mood.id %}" class="text-right mr-2">
+              {% csrf_token %}<input type="submit" class="btn btn-danger" value="Delete">
+            </form>
+            <a class="btn btn-info d-inline-block mr-2" href="{% url 'diary:edit' mood.pk %}">Edit</a>
+          </div>
           <p class="card-text">
-            <small class="text-muted">Last updated {{ mood.created_on | date:"d/m/Y H:i" }}</small>
+            <small class="text-muted">Last updated {{ mood.updated_on | date:"d/m/Y H:i" }}</small>
           </p>
         </div>
       </div>

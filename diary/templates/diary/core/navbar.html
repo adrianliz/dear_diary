@@ -1,0 +1,26 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="{% url 'diary:dashboard' %}">
+    <img src="{% static 'diary/img/logo.png' %}" width="35" height="35" alt="logo" loading="lazy">
+    <span class="font-weight-bold ml-2">Dear Diary</span>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        {% url 'diary:dashboard' as dashboard_url %}
+        {% url 'diary:create' as create_url %}
+        <a class="nav-link {% if request.path == dashboard_url %}active font-weight-bold{% endif %}"
+           href="{{dashboard_url}}">Dashboard</a>
+      </li>
+      <li>
+        <a class="nav-link {% if request.path == create_url %}active font-weight-bold{% endif %}"
+        href="{{create_url}}">New mood</a>
+      </li>
+    </ul>
+  </div>
+</nav>

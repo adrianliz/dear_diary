@@ -1,4 +1,4 @@
-{% extends "diary/base.html" %}
+{% extends "diary/core/base.html" %}
 {% load widget_tweaks %}
 
 {% block content %}
@@ -6,11 +6,18 @@
   <div class="col-12">
     <form method="POST" action="">
       {% csrf_token %}
-      <h1 class="display-4 text-center mb-4">{{form_name}}</h1>
+      <div class="div mb-4">
+        <h1 class="display-4">{{form_name}}</h1>
+      </div>
       {% for field in form %}
       <div class="form-group">
         {{field.label}}
+
+        {% if field.field.widget.input_type != "range" %}
         {% render_field field placeholder=field.label class+="form-control" %}
+        {% else %}
+        {% render_field field %}
+        {% endif %}
       </div>
       {% endfor %}
       <div class="text-right mb-3">

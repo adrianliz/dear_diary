@@ -1,4 +1,4 @@
-{% extends "diary/base.html" %}
+{% extends "diary/core/base.html" %}
 {% load static %}
 
 {% block content %}
@@ -15,7 +15,7 @@
     </div>
 
     <div class="col mt-3">
-      {% include 'diary/form.html' %}
+      {% include 'diary/core/form.html' %}
 
       <div class="text-right font-weight-bold">
         <a href="{% url 'diary:singup' %}" class="text-decoration-none">Don't have an account? Sing up</a>

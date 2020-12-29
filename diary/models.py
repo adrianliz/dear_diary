@@ -5,7 +5,7 @@ class Mood(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=300)
     score = models.IntegerField()
-    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
