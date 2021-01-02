@@ -3,7 +3,7 @@ from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.views.generic import ListView, DeleteView, CreateView, UpdateView
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.forms import AuthenticationForm
 from diary.forms import RegisterForm, MoodForm
 from django.http import HttpResponseRedirect
@@ -63,11 +63,6 @@ class DashboardView(LoginRequiredMixin, ListView):
         return Mood.objects.filter(user=self.request.user)[:10]
 
 
-class DeleteMoodView(LoginRequiredMixin, DeleteView):
-    model = Mood
-    success_url = reverse_lazy('diary:dashboard')
-
-
 class CreateMoodView(LoginRequiredMixin, CreateView):
     model = Mood
     form_class = MoodForm
@@ -83,8 +78,20 @@ class CreateMoodView(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super(CreateMoodView, self).form_valid(form)
 
+class OwnershipChecker(UserPassesTestMixin):
+    def test_func(self):
+        self.object = self.get_object()
+        return self.request.user == self.object.user
 
-class UpdateMoodView(LoginRequiredMixin, UpdateView):
+    def handle_no_permission(self):
+        return HttpResponseRedirect(reverse('diary:dashboard'))
+
+class DeleteMoodView(LoginRequiredMixin, OwnershipChecker, DeleteView):
+    model = Mood
+    success_url = reverse_lazy('diary:dashboard')
+
+
+class UpdateMoodView(LoginRequiredMixin, OwnershipChecker, UpdateView):
     model = Mood
     form_class = MoodForm
     success_url = reverse_lazy('diary:dashboard')
