@@ -3,11 +3,6 @@
 
 {% block content %}
 {% include 'diary/core/navbar.html' %}
-
-<div class="div text-right mt-3 mr-3">
-  <a type="button" class="btn btn-primary" href="{% url 'diary:logout' %}">Logout</a>
-</div>
-
 <div class="container mx-auto">
   <div class="row row-cols-1 row-cols-md-2">
     {% for mood in moods %}

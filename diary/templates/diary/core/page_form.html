@@ -1,0 +1,31 @@
+{% extends "diary/core/base.html" %}
+
+{% block content %}
+{% if include_navbar %}
+{% include 'diary/core/navbar.html' %}
+{% endif %}
+<div class="container">
+  {% if page_title %}
+  <div class="row mb-4">
+    <div class="col-sm-6 mx-auto">
+      <h1 class="text-center">
+        {{page_title | safe}}
+      </h1>
+      </h1>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="row">
+    <div class="col-sm-6 mx-auto">
+      {% include 'diary/core/form.html' %}
+    </div>
+  </div>
+
+  <div class="text-center font-weight-bold mt-3">
+    {% if back_url %}
+    <a href={{back_url}} class="text-decoration-none">Go back</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

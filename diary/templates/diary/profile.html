@@ -1,0 +1,59 @@
+{% extends "diary/core/base.html" %}
+
+{% block content %}
+{% include 'diary/core/navbar.html' %}
+<div class="container mt-2">
+  <div class="row">
+    <div class="col-sm-6 mx-auto">
+      <h1 class="text-center mb-3">Hi {{profile.user}}</h1>
+    </div>
+  </div>
+
+  <div class="row-sm-12">
+    <div class="card mx-auto shadow p-3 bg-white rounded">
+      <div class="text-center">
+        <img src="{{profile.avatar.url}}" class="img-thumbnail rounded mr-3" alt="avatar">
+      </div>
+      <div class="card-body">
+        <h5 class="mt-0 text-center">Your profile</h5>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="row row-cols-sm-2 p-2">
+              <span class="text-muted mr-5">Email</span>
+              {{profile.user.email}}
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row row-cols-sm-2 p-2">
+              <span class="text-muted mr-5">Birth date</span>
+              {{profile.birth_date | date:"d/m/Y"}}
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row row-cols-sm-2 p-2">
+              <span class="text-muted mr-5">Address</span>
+              {{profile.address}}
+            </div>
+          </li>
+          {% if profile.gender == 1 %}
+          <div class="text-center fa-2x mt-2">
+            <i class="fas fa-5x fa-male"></i>
+          </div>
+          {% elif profile.gender == 2 %}
+          <div class="text-center mt-2">
+            <i class="fas fa-5x fa-female"></i>
+          </div>
+          {% else %}
+          <div class="text-center mt-2">
+            <i class="fas fa-5x fa-genderless"></i>
+          </div>
+          {% endif %}
+        </ul>
+        <div class="text-right">
+          <a class="btn btn-info" href="{% url 'diary:edit_profile' profile.id %}">Edit</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -11,9 +11,10 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
+      {% url 'diary:dashboard' as dashboard_url %}
+      {% url 'diary:create' as create_url %}
+      {% url 'diary:profile' as profile_url %}
       <li class="nav-item">
-        {% url 'diary:dashboard' as dashboard_url %}
-        {% url 'diary:create' as create_url %}
         <a class="nav-link {% if request.path == dashboard_url %}active font-weight-bold{% endif %}"
            href="{{dashboard_url}}">Dashboard</a>
       </li>
@@ -21,6 +22,14 @@
         <a class="nav-link {% if request.path == create_url %}active font-weight-bold{% endif %}"
         href="{{create_url}}">New mood</a>
       </li>
+      <li>
+        <a class="nav-link {% if request.path == profile_url %}active font-weight-bold{% endif %}"
+        href="{{profile_url}}">Profile</a>
+      </li>
     </ul>
   </div>
 </nav>
+
+<div class="div text-right mt-3 mr-3">
+  <a type="button" class="btn btn-primary" href="{% url 'diary:logout' %}">Logout</a>
+</div>

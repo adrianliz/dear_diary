@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Mood(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=300)
@@ -16,3 +17,18 @@ class Mood(models.Model):
                 name="score constraint",
             )
         ]
+
+
+class Profile(models.Model):
+    GENDER_CHOICES = (
+        (1, 'Male'),
+        (2, 'Female'),
+    )
+    avatar = models.ImageField(
+        upload_to='moods/avatars/', default="moods/avatars/noimage.png")
+    birth_date = models.DateField(blank=True, null=True)
+    address = models.CharField(max_length=100, blank=True)
+    gender = models.PositiveSmallIntegerField(
+        choices=GENDER_CHOICES, blank=True, null=True)
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
