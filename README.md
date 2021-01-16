@@ -91,7 +91,7 @@ sudo service apache2 restart
 ```
 
 ### Parte 4 (opcional)
-- En este apartado sirve para añadir seguridad al directorio /var/www
+- Este apartado sirve para añadir seguridad al directorio /var/www
 - Ejecutar:
 ```sh
 sudo groupadd varwwwusers
