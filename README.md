@@ -8,6 +8,7 @@ recopilar lo que les pasa día a día y que estos puedan puntuar sus estados o "
 + [En producción]
 ```
 -> dear-diary.iw (añadir a /etc/hosts la entrada: `155.210.71.69 dear-diary.iw`)
+-> ¡dear-diary disponible en [dear-diary.ml](http://dear-diary.ml)!
 
 ## Cómo funciona la configuración
 Se ha hecho uso del módulo [django-environ](https://django-environ.readthedocs.io/en/latest/)
@@ -29,7 +30,7 @@ En el entorno de producción Ubuntu 18.04 LTS seguir los siguientes pasos para d
 con el usuario `alumno`:
 ### Parte 1
 - Ejecutar:
-```bash
+```sh
 sudo apt-get update
 sudo apt-get install apache2 apache2-dev
 sudo apt-get install libapache2-mod-wsgi-py3
@@ -39,23 +40,25 @@ pip install django-environ
 pip install django-widget-tweaks
 pip install mod_wsgi-express
 ```
-```bash
+```sh
 sudo mod_wsgi-express install-module
 sudo vi /etc/apache2/mods-available/wsgi.load
 ```
-- Pega:
-```bash
+- Pegar:
+```sh
 LoadModule wsgi_module /usr/lib/apache2/modules/mod_wsgi-py38.cpython-38-x86_64-linux-gnu.so
 ```
-```bash
+- Ejecutar:
+```sh
 sudo vi /etc/apache2/mods-available/wsgi.conf
 ```
-- Pega:
-```bash
+- Pegar:
+```sh
 WSGIPythonHome /home/alumno/miniconda3
 WSGIPythonPath /home/alumno/miniconda3/envs/djangoEnv/pyhton3.8
 ```
-```bash
+- Ejecutar:
+```sh
 sudo a2enmod wsgi
 sudo service apache2 restart
 ```
@@ -64,7 +67,7 @@ sudo service apache2 restart
 - Crear el fichero .env en el directorio dear_diary (con las variables de entorno descritas)
 - Copiar el fichero apache_conf/dear_diary.conf en /etc/apache2/sites-available
 - Ejecutar:
-```bash
+```sh
 sudo a2ensite /etc/apache2/sites-available/dear_diary.conf
 ```
 - Crear un directorio /var/www/dear_diary
@@ -76,7 +79,7 @@ sudo a2ensite /etc/apache2/sites-available/dear_diary.conf
 ### Parte 3
 - Ir al directorio del proyecto y abrir una terminal
 - Ejecutar:
-```bash
+```sh
 conda activate djangoEnv
 python manage.py collectstatic
 python manage.py migrate
