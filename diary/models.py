@@ -25,7 +25,7 @@ class Profile(models.Model):
         (2, 'Female'),
     )
     avatar = models.ImageField(
-        upload_to='moods/avatars/', default="moods/avatars/noimage.png")
+        upload_to='avatars/', default="avatars/noimage.png")
     birth_date = models.DateField(blank=True, null=True)
     address = models.CharField(max_length=100, blank=True)
     gender = models.PositiveSmallIntegerField(
