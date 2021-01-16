@@ -8,6 +8,7 @@ recopilar lo que les pasa día a día y que estos puedan puntuar sus estados o "
 + [En producción]
 ```
 -> dear-diary.iw (añadir a /etc/hosts la entrada: `155.210.71.69 dear-diary.iw`)
+
 -> ¡dear-diary disponible en [dear-diary.ml](http://dear-diary.ml)!
 
 ## Cómo funciona la configuración
