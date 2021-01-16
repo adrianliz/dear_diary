@@ -49,7 +49,8 @@ class SingupView(CreateView):
 
     def form_valid(self, form):
         user = form.save()
-        login(request, user)
+        login(self.request, user)
+        return HttpResponseRedirect(reverse('diary:dashboard'))
 
 
 def logout_view(request):
