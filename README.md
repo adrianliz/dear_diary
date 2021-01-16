@@ -19,16 +19,19 @@ distintos entornos, a partir de un fichero .env
 
 En concreto, se debe crear un fichero .env en el directorio dear_diary, con las siguientes
 variables de entorno:
+```sh
 - SECRET_KEY=[SECRET_KEY]
 - DEBUG=[True|False]
 - ALLOWED_HOSTS=[ALLOWED_HOST1,...,ALLOWED_HOSTN]
 - SQLITE_URL=[sqlite:///full/path/to/sqlite/database]
 - STATIC_ROOT=[full/path/to/static/]
-- MEDIA_ROOT=[full/path/to/media]
+- MEDIA_ROOT=[full/path/to/media/]
+```
 
 ## Entorno de producción en Ubuntu 18.04 LTS
 En el entorno de producción Ubuntu 18.04 LTS seguir los siguientes pasos para desplegar dear-diary
 con el usuario `alumno`:
+
 ### Parte 1
 - Ejecutar:
 ```sh
@@ -75,7 +78,7 @@ sudo a2ensite /etc/apache2/sites-available/dear_diary.conf
 - Copiar el fichero apache_conf/wsgi.py en /var/www/dear_diary
 - Crear un directorio /var/www/dear_diary/media/avatars
 - Crear un fichero /var/www/dear_diary/media/avatars/noimage.png (foto de perfil por defecto)
-- Crear un fichero /var/www/dear_diary/db.sqlite3 (asignarle permisos de rw para todos los usuarios)
+- Crear un fichero /var/www/dear_diary/db.sqlite3
 
 ### Parte 3
 - Ir al directorio del proyecto y abrir una terminal
@@ -86,6 +89,20 @@ python manage.py collectstatic
 python manage.py migrate
 sudo service apache2 restart
 ```
+
+### Parte 4 (opcional)
+- En este apartado sirve para añadir seguridad al directorio /var/www
+- Ejecutar:
+```sh
+sudo groupadd varwwwusers
+sudo adduser www-data varwwwusers
+sudo chgrp -R varwwwusers /var/www/
+sudo chmod -R 770 /var/www/
+```
+
+> Con esto se consigue que el usuario www-data, que es el que ejecuta el daemon de apache2,
+> sea el único que tenga permisos de rwx en el directorio donde residirá dear_diary, aparte
+> del propio creador de /var/www
 
 ## Planificación
 - [:white_check_mark:] v0.1.0 -> estructura básica del proyecto
