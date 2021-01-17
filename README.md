@@ -119,3 +119,5 @@ sudo chmod -R 770 /var/www/
 ![v0.5.0_profile](screenshots/v0.5.0_profile.png)
 ![v0.5.0_edit_profile](screenshots/v0.5.0_edit_profile.png)
 - [:white_check_mark:] v0.6.0 -> setup de producción
+- [:white_check_mark:] v0.7.0 -> paginación dashboard y mejoras del diseño web-responsive
+![v0.7.0](screenshots/v0.7.0.png)
