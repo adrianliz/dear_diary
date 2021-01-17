@@ -61,9 +61,10 @@ def logout_view(request):
 class DashboardView(LoginRequiredMixin, ListView):
     template_name = 'diary/dashboard.html'
     context_object_name = 'moods'
+    paginate_by = 5
 
     def get_queryset(self):
-        return Mood.objects.filter(user=self.request.user)[:10]
+        return Mood.objects.filter(user=self.request.user).order_by('-updated_on')
 
 
 class CreateMoodView(LoginRequiredMixin, CreateView):
