@@ -3,7 +3,10 @@ import os
 import environ
 
 # Read .env file
-env = environ.Env()
+env = environ.Env(
+    DEBUG=(bool, False),
+    ALLOWED_HOSTS=(list, []),
+)
 environ.Env.read_env()
 
 # Config variables
@@ -91,11 +94,13 @@ USE_TZ = True
 # Login page
 LOGIN_URL = '/'
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
-STATIC_ROOT = os.path.abspath(env.str('STATIC_ROOT'))
+# Static files
+STATIC_ROOT = os.path.abspath(env.str('STATIC_ROOT', ""))
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 STATIC_URL = '/static/'
 
 # Media files
-MEDIA_ROOT = os.path.abspath(env.str('MEDIA_ROOT'))
+MEDIA_ROOT = os.path.abspath(env.str('MEDIA_ROOT', os.path.join(BASE_DIR, 'media')))
 MEDIA_URL = '/media/'
