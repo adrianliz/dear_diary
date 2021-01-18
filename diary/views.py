@@ -4,6 +4,7 @@ from django.views import View
 from django.views.generic import ListView, DeleteView, CreateView, UpdateView, TemplateView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.forms import AuthenticationForm
 from diary.forms import RegisterForm, MoodForm, ProfileForm
@@ -12,7 +13,16 @@ from django.http import HttpResponseRedirect
 from .models import Mood, Profile
 
 
-class LandingView(View):
+class UserNotLoggedValidator(UserPassesTestMixin):
+    def test_func(self):
+        # Únicamente cuando el usuario NO esté autenticado
+        return not self.request.user.is_authenticated
+
+    def handle_no_permission(self):
+        return HttpResponseRedirect(reverse('diary:dashboard'))
+
+
+class LandingView(UserNotLoggedValidator, View):
     form_class = AuthenticationForm
     template_name = 'diary/landing.html'
 
@@ -34,7 +44,7 @@ class LandingView(View):
         return render(request, self.template_name, {'form': form, 'form_name': 'Login'})
 
 
-class SingupView(CreateView):
+class SignupView(UserNotLoggedValidator, CreateView):
     model = User
     form_class = RegisterForm
     success_url = reverse_lazy('diary:dashboard')
@@ -42,7 +52,7 @@ class SingupView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form_name'] = "Sing up"
+        context['form_name'] = "Sign up"
         context['page_title'] = "Welcome to DearDiary"
         context['back_url'] = reverse('diary:landing')
         return context
@@ -53,6 +63,7 @@ class SingupView(CreateView):
         return HttpResponseRedirect(reverse('diary:dashboard'))
 
 
+@login_required()
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('diary:landing'))

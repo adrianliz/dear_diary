@@ -11,13 +11,18 @@
       </div>
       {% for field in form %}
       <div class="form-group">
-        {{field.label}}
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
 
         {% with field_type=field.field.widget.input_type %}
-        {% if field_type != "range" and field_type != "file" %}
-        {% render_field field placeholder=field.label class+="form-control" %}
+        {% if field_type == "range" %}
+        {{ field }}
+        {% elif field_type == "file" %}
+        <div class="custom-file">
+          {{ field }}
+          <label class="custom-file-label" for="{{ field.id_for_label }}">Choose file</label>
+        </div>
         {% else %}
-        {% render_field field %}
+        {% render_field field placeholder=field.label class+="form-control" %}
         {% endif %}
         {% endwith %}
       </div>

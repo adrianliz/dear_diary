@@ -121,3 +121,5 @@ sudo chmod -R 770 /var/www/
 - [:white_check_mark:] v0.6.0 -> setup de producción
 - [:white_check_mark:] v0.7.0 -> paginación dashboard y mejoras del diseño web-responsive
 ![v0.7.0](screenshots/v0.7.0.png)
+- [:white_check_mark:] v0.8.0 ->
+mejoras en el renderizado de los formularios y redirección del usuario en Landing y SignUp si ya está logueado

@@ -28,7 +28,7 @@ class ProfileForm(ModelForm):
         model = Profile
         fields = ['avatar', 'birth_date', 'address', 'gender']
         widgets = {
-            'avatar': forms.FileInput(attrs={'class': 'form-control-range'}),
+            'avatar': forms.FileInput(attrs={'class': 'custom-file-input'}),
             'birth_date': forms.DateInput(format=('%Y-%m-%d'),
                                           attrs={'class': 'form-control',
                                                  'type': 'date'
