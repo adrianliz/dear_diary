@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
-from django.db.models import Avg, F
+from django.db.models import Avg
 from django.views import View
 from django.views.generic import ListView, DeleteView, CreateView, UpdateView, TemplateView, FormView
 from django.contrib.auth import authenticate, login, logout
