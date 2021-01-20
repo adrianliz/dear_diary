@@ -14,6 +14,7 @@
     {% url 'diary:create' as create_url %}
     {% url 'diary:profile' as profile_url %}
     {% url 'diary:contact' as contact_url %}
+    {% url 'diary:evolution' as evolution_url %}
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link {% if request.path == dashboard_url %}active font-weight-bold{% endif %}"
@@ -26,6 +27,10 @@
       <li class="nav-item">
         <a class="nav-link {% if request.path == profile_url %}active font-weight-bold{% endif %}"
         href="{{profile_url}}">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if request.path == evolution_url %}active font-weight-bold{% endif %}"
+        href="{{evolution_url}}">My evolution</a>
       </li>
     </ul>
     <ul class="navbar-nav">

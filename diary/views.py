@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
+from django.db.models import Avg, F
 from django.views import View
 from django.views.generic import ListView, DeleteView, CreateView, UpdateView, TemplateView, FormView
 from django.contrib.auth import authenticate, login, logout
@@ -170,3 +171,13 @@ class ContactView(LoginRequiredMixin, SuccessMessageMixin, FormView):
         contact_message.save()
         form.send_email()
         return super().form_valid(form)
+
+
+class EvolutionView(LoginRequiredMixin, TemplateView):
+    template_name = 'diary/evolution.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['avg_scores'] = Mood.objects.filter(
+            user=self.request.user).values('updated_on__date').annotate(avg=Avg('score'))
+        return context

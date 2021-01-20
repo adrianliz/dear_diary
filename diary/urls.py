@@ -1,7 +1,7 @@
 from django.urls import path
 from diary.views import LandingView, SignupView, DashboardView, \
     DeleteMoodView, CreateMoodView, EditMoodView, ProfileView, \
-    EditProfileView, ContactView, logout_view
+    EditProfileView, ContactView, EvolutionView, logout_view
 
 app_name = 'diary'
 urlpatterns = [
@@ -14,5 +14,6 @@ urlpatterns = [
     path('edit/<int:pk>/', EditMoodView.as_view(), name="edit_mood"),
     path('profile/', ProfileView.as_view(), name="profile"),
     path('profile/edit/<int:pk>', EditProfileView.as_view(), name="edit_profile"),
-    path('contact/', ContactView.as_view(), name="contact")
+    path('contact/', ContactView.as_view(), name="contact"),
+    path('evolution/', EvolutionView.as_view(), name="evolution")
 ]
