@@ -102,5 +102,14 @@ STATICFILES_DIRS = [
 STATIC_URL = '/static/'
 
 # Media files
-MEDIA_ROOT = os.path.abspath(env.str('MEDIA_ROOT', os.path.join(BASE_DIR, 'media')))
+MEDIA_ROOT = os.path.abspath(
+    env.str('MEDIA_ROOT', os.path.join(BASE_DIR, 'media')))
 MEDIA_URL = '/media/'
+
+# Email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = env.str('EMAIL_HOST')
+EMAIL_HOST_USER = env.str('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = env.str('EMAIL_PORT')

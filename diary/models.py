@@ -32,3 +32,9 @@ class Profile(models.Model):
         choices=GENDER_CHOICES, blank=True, null=True)
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+class ContactMessage(models.Model):
+    subject = models.CharField(max_length=50)
+    message = models.CharField(max_length=300)
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -1,16 +1,17 @@
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
+from django.http import HttpResponseRedirect
 from django.views import View
-from django.views.generic import ListView, DeleteView, CreateView, UpdateView, TemplateView
+from django.views.generic import ListView, DeleteView, CreateView, UpdateView, TemplateView, FormView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.forms import AuthenticationForm
-from diary.forms import RegisterForm, MoodForm, ProfileForm
-from django.http import HttpResponseRedirect
+from django.contrib.messages.views import SuccessMessageMixin
 
 from .models import Mood, Profile
+from .forms import RegisterForm, MoodForm, ProfileForm, ContactForm
 
 
 class UserNotLoggedValidator(UserPassesTestMixin):
@@ -148,3 +149,24 @@ class EditProfileView(LoginRequiredMixin, OwnershipValidator, UpdateView):
         context['include_navbar'] = True
         context['back_url'] = reverse('diary:profile')
         return context
+
+
+class ContactView(LoginRequiredMixin, SuccessMessageMixin, FormView):
+    form_class = ContactForm
+    template_name = 'diary/core/page_form.html'
+    success_message = 'Message sent correctly'
+    success_url = reverse_lazy('diary:dashboard')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form_name'] = "Contact"
+        context['include_navbar'] = True
+        context['back_url'] = reverse('diary:dashboard')
+        return context
+
+    def form_valid(self, form):
+        contact_message = form.save(commit=False)
+        contact_message.user = self.request.user
+        contact_message.save()
+        form.send_email()
+        return super().form_valid(form)

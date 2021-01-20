@@ -4,44 +4,8 @@
 {% block content %}
 {% include 'diary/core/navbar.html' %}
 <div class="container mx-auto">
-  {% if is_paginated %}
-  <nav aria-label="moods-pagination">
-    <ul class="pagination justify-content-center mt-3">
-      {% if page_obj.has_previous %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-      </li>
-      {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-      </li>
-      {% endif %}
-
-      {% for i in paginator.page_range %}
-      {% if page_obj.number == i %}
-      <li class="page-item active" aria-current="page">
-        <a class="page-link" href="#">{{ i }}<span class="sr-only">(current)</span></a>
-      </li>
-      {% else %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ i }}">{{ i }}</a>
-      </li>
-      {% endif %}
-      {% endfor %}
-
-      {% if page_obj.has_next %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
-      </li>
-      {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
-      </li>
-      {% endif %}
-    </ul>
-  </nav>
-  {% endif %}
-
+  {% include 'diary/core/success_messages.html' %}
+  {% include 'diary/core/pagination.html' %}
   {% if moods|length > 0 %}
   <div class="row row-cols-1 row-cols-md-2">
     {% for mood in moods %}
@@ -66,7 +30,7 @@
             <form method="POST" action="{% url 'diary:delete' mood.id %}" class="text-right mr-2">
               {% csrf_token %}<input type="submit" class="btn btn-danger" value="Delete">
             </form>
-            <a class="btn btn-info d-inline-block mr-2" href="{% url 'diary:edit' mood.pk %}">Edit</a>
+            <a class="btn btn-info d-inline-block mr-2" href="{% url 'diary:edit_mood' mood.pk %}">Edit</a>
           </div>
           <p class="card-text">
             <small class="text-muted">Last updated {{ mood.updated_on | date:"d/m/Y H:i" }}</small>

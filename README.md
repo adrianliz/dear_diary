@@ -26,6 +26,10 @@ variables de entorno:
 - SQLITE_URL=[sqlite:///full/path/to/sqlite/database]
 - STATIC_ROOT=[full/path/to/static/]
 - MEDIA_ROOT=[full/path/to/media/]
+- EMAIL_HOST=[EMAIL_HOST]
+- EMAIL_HOST_USER=[EMAIL_HOST_USER]
+- EMAIL_HOST_PASSWORD=[EMAIL_HOST_PASSWORD]
+- EMAIL_PORT=[EMAIL_PORT]
 ```
 
 ## Entorno de producción en Ubuntu 18.04 LTS
@@ -123,3 +127,5 @@ sudo chmod -R 770 /var/www/
 ![v0.7.0](screenshots/v0.7.0.png)
 - [:white_check_mark:] v0.8.0 ->
 mejoras en el renderizado de los formularios y redirección del usuario en Landing y SignUp si ya está logueado
+- [:white_check_mark:] v0.9.0 -> formulario de contacto
+![v0.9.0](screenshots/v0.9.0.png)
