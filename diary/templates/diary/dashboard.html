@@ -7,18 +7,18 @@
   {% include 'diary/core/success_messages.html' %}
   {% include 'diary/core/pagination.html' %}
   {% if moods|length > 0 %}
-  <div class="row row-cols-1 row-cols-md-2">
+  <div class="row row-cols-1 row-cols-md-2 mb-5">
     {% for mood in moods %}
     <div class="col my-3">
       <div class="card h-100 shadow bg-white rounded">
         <div class="card-body">
-          <h1 class="card-title display-4 mb-4">
+          <h1 class="card-title display-4 mb-4 text-break">
             <i class="ml-2 far fa-bookmark"></i>
             {{mood.name}}
           </h1>
           <h5>Description <i class="ml-2 fas fa-feather"></i></h5>
           <hr class="m-0" />
-          <p class="card-title">{{mood.description}}</p>
+          <p class="card-title overflow-auto">{{mood.description}}</p>
           <p class="card-text">
             {% with ''|center:mood.score as range %}
             {% for _ in range %}
@@ -41,7 +41,7 @@
     {% endfor %}
   </div>
   {% else %}
-  <div class="text-center mt-5">
+  <div class="text-center my-5">
     <h1 class="display-4">No mood published yet...</h1>
     <div class="mx-auto text-center col-md-6 mt-5">
       <img src="{% static 'diary/img/nocontent.jpeg' %}" class="img-fluid rounded" alt="no mood published">

@@ -129,3 +129,4 @@ sudo chmod -R 770 /var/www/
 mejoras en el renderizado de los formularios y redirección del usuario en Landing y SignUp si ya está logueado
 - [:white_check_mark:] v0.9.0 -> formulario de contacto
 ![v0.9.0](screenshots/v0.9.0.png)
+- [:white_check_mark:] v0.10.0 -> footer
