@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
-from django.db.models import Avg
+from django.utils import timezone
 from django.views import View
 from django.views.generic import ListView, DeleteView, CreateView, UpdateView, TemplateView, FormView
 from django.contrib.auth import authenticate, login, logout
@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import Avg
 
 from .models import Mood, Profile
 from .forms import RegisterForm, MoodForm, ProfileForm, ContactForm
@@ -126,6 +127,12 @@ class EditMoodView(LoginRequiredMixin, OwnershipValidator, UpdateView):
         context['page_title'] = "How it's going? <i class=\"ml-2 far fa-lightbulb\"></i>"
         context['back_url'] = reverse('diary:dashboard')
         return context
+
+    def form_valid(self, form):
+        mood = form.save(commit=False)
+        mood.updated_on = timezone.now()
+        mood.save()
+        return super(EditMoodView, self).form_valid(form)
 
 
 class ProfileView(LoginRequiredMixin, TemplateView):

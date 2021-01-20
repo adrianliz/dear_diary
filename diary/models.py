@@ -7,7 +7,8 @@ class Mood(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=300)
     score = models.IntegerField()
-    updated_on = models.DateTimeField(default=timezone.now) # Necesario para que se pueda editar vía admin
+    # Necesario para que se pueda editar vía admin ya que con auto_now no se permite
+    updated_on = models.DateTimeField(default=timezone.now)
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
@@ -18,10 +19,6 @@ class Mood(models.Model):
                 name="score constraint",
             )
         ]
-
-    def save(self, *args, **kwargs):
-        self.updated_on = timezone.now()
-        super(Mood, self).save(*args, **kwargs)
 
 
 class Profile(models.Model):
