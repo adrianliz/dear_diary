@@ -3,28 +3,30 @@
 {% block content %}
 {% include 'diary/core/navbar.html' %}
 <div class="container mt-3">
-  <h1 class="display-4 text-center mb-4">My evolution</h1>
+  <h1 class="display-4 text-center mb-4">
+    My evolution
+    <i class="fas fa-seedling text-success"></i>
+  </h1>
   <div class="card shadow mb-5 p-3">
     <div class="card-body">
-      <div class="h-100"></div>
       <canvas id="chart"></canvas>
-    </div>
-    <div class="text-center mt-4">
-      <div class="bg-dark text-white font-weight-bold">
-        <p class="p-2">Do excercise</p>
-      </div>
-      <div class="bg-primary text-white font-weight-bold">
-        <p class="p-2">Sleep 8 hours every day</p>
-      </div>
-      <div class="bg-info text-white font-weight-bold">
-        <p class="p-2">Do something you like every day</p>
-      </div>
-      <div class="bg-success text-white font-weight-bold">
-        <p class="p-2">Accept yourself</p>
-      </div>
+
+      <ul class="list-group text-center mt-4">
+        <li class="list-group-item list-group-item-dark font-weight-bold">
+          <p>Do excercise</p>
+        </li>
+        <li class="list-group-item list-group-item-primary font-weight-bold">
+          <p>Sleep 8 hours every day</p>
+        </li>
+        <li class="list-group-item list-group-item-warning font-weight-bold">
+          <p>Do something you like every day</p>
+        </li>
+        <li class="list-group-item list-group-item-success font-weight-bold">
+          <p>Accept yourself</p>
+        </li>
+      </ul>
     </div>
   </div>
-</div>
 </div>
 {% endblock %}
 

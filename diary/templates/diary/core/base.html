@@ -11,10 +11,17 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="{% static 'diary/css/bootstrap.min.css' %}">
 
+  <!-- Custom font -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400&display=swap" rel="stylesheet">
+
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="{% static 'diary/css/style.css' %}">
+
   <title>Dear Diary</title>
 </head>
 
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column vh-100">
   {% block content %}
   {% endblock %}
 

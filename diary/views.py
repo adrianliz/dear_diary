@@ -91,7 +91,7 @@ class CreateMoodView(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context['form_name'] = "New mood"
         context['include_navbar'] = True
-        context['page_title'] = "How it's going? <i class=\"ml-2 far fa-lightbulb\"></i>"
+        context['page_title'] = "How it's going? <i class=\"ml-2 far fa-lightbulb text-warning\"></i>"
         context['back_url'] = reverse('diary:dashboard')
         return context
 
@@ -124,7 +124,7 @@ class EditMoodView(LoginRequiredMixin, OwnershipValidator, UpdateView):
         context = super().get_context_data(**kwargs)
         context['form_name'] = "Edit mood"
         context['include_navbar'] = True
-        context['page_title'] = "How it's going? <i class=\"ml-2 far fa-lightbulb\"></i>"
+        context['page_title'] = "How it's going? <i class=\"ml-2 far fa-lightbulb text-warning\"></i>"
         context['back_url'] = reverse('diary:dashboard')
         return context
 
