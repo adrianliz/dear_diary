@@ -1,3 +1,41 @@
 * {
   font-family: 'Nunito', sans-serif;
 }
+
+.background-pattern {
+  background-color: #fbfbfb;
+  opacity: 1;
+  background-image:  radial-gradient(#a3c2e7 1px, transparent 1px), radial-gradient(#a3c2e7 1px, #fbfbfb 1px);
+  background-size: 40px 40px;
+  background-position: 0 0,20px 20px;
+}
+
+.mouse-effect:hover{
+  font-size: 1.1rem;
+}
+
+.skin-color {
+  color: #f1c27d;
+}
+
+/* Animaciones */
+
+.animated {
+	-webkit-animation-duration: 1.5s;
+	animation-duration: 1.5s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.fadeIn {
+	animation-name: fadeIn;
+}

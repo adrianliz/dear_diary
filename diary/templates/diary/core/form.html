@@ -5,10 +5,10 @@
     <form method="POST" enctype="multipart/form-data" action="">
       {% csrf_token %}
       <div class="div mb-4">
-        <h1 class="display-3">{{form_name}}</h1>
+        <h1 class="display-3 font-weight-bold">{{form_name}}</h1>
       </div>
       {% for field in form %}
-      <div class="form-group">
+      <div class="form-group font-weight-bold">
         <label for="{{ field.id_for_label }}">{{ field.label }}</label>
 
         {% with field_type=field.field.widget.input_type %}

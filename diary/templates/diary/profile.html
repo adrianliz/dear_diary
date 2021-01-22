@@ -5,7 +5,7 @@
 <div class="container mt-3">
   <div class="row">
     <div class="col-sm-6 mx-auto">
-      <h1 class="display-4 text-center my-3">
+      <h1 class="display-4 font-weight-bold text-center my-3">
         Hi {{profile.user}}
         <i class="fas fa-id-card text-primary"></i>
       </h1>
@@ -13,9 +13,9 @@
   </div>
 
   <div class="row-sm-12 mb-5">
-    <div class="card mx-auto shadow p-3 bg-white rounded">
+    <div class="card mx-auto shadow p-3 bg-white rounded-lg animated fadeIn">
       <div class="mx-auto text-center col-md-6">
-        <img src="{{profile.avatar.url}}" class="img-fluid rounded mr-3" alt="avatar">
+        <img src="{{profile.avatar.url}}" class="img-fluid rounded-circle" alt="avatar">
       </div>
       <div class="card-body">
         <h5 class="mt-0 text-center">Your profile</h5>
@@ -39,16 +39,16 @@
             </div>
           </li>
           {% if profile.gender == 1 %}
-          <div class="text-center fa-2x mt-4">
-            <i class="fas fa-5x fa-male"></i>
+          <div class="text-center mt-4">
+            <i class="fas fa-5x fa-male skin-color"></i>
           </div>
           {% elif profile.gender == 2 %}
           <div class="text-center mt-4">
-            <i class="fas fa-5x fa-female"></i>
+            <i class="fas fa-5x fa-female skin-color"></i>
           </div>
           {% else %}
           <div class="text-center mt-4">
-            <i class="fas fa-5x fa-genderless"></i>
+            <i class="fas fa-5x fa-genderless skin-color"></i>
           </div>
           {% endif %}
         </ul>

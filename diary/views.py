@@ -56,7 +56,7 @@ class SignupView(UserNotLoggedValidator, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form_name'] = "Sign up"
-        context['page_title'] = "Welcome to DearDiary"
+        context['page_title'] = "Welcome! <i class=\"skin-color fas fa-hand-sparkles\"></i>"
         context['back_url'] = reverse('diary:landing')
         return context
 

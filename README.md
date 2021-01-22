@@ -132,3 +132,4 @@ mejoras en el renderizado de los formularios y redirección del usuario en Landi
 - [:white_check_mark:] v0.10.0 -> footer
 - [:white_check_mark:] v1.0.0 -> gráfico evolución puntuaje "moods"
 ![v1.0.0](screenshots/v1.0.0.png)
+- - [:white_check_mark:] v1.1.0 -> estilos nuevos
