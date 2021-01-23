@@ -1,0 +1,47 @@
+{% extends "diary/core/base.html" %}
+{% load static %}
+{% load filters %}
+{% block title %}
+Dear Diary - Comunity
+{% endblock %}
+
+{% block content %}
+{% include 'diary/core/navbar.html' %}
+<div class="container mt-3">
+  {% if profiles|length > 0 %}
+  {% include 'diary/core/pagination.html' %}
+  <h1 class="display-4 text-center font-weight-bold my-3">
+    Community
+    <i class="fas fa-user-circle text-primary"></i>
+  </h1>
+  <div class="card-columns d-inline-block animated fadeIn mb-5">
+    {% for profile in profiles %}
+    <div class="card shadow p-3 bg-white rounded-lg">
+      <img loading="lazy" src="{{profile.avatar.url}}" class="p-3 card-img-top rounded-circle" alt="{{profile.user}}">
+      <div class="card-body">
+        <h5 class="card-title text-center">{{profile.user}}</h5>
+        <div class="text-center mt-4">
+          {% if profile.public %}
+          <a href="{% url 'diary:community-user' profile.user.id %}" class="btn btn-primary stretched-link">Show
+            moods
+            <span class="badge badge-light ml-1">{{moods_count | get_mood_count:profile.user.id}}</span>
+          </a>
+          {% else %}
+          <a class="btn btn-danger disabled">Profile is private</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="text-center mb-5">
+    <h1 class="display-4 font-weight-bold">No public profile yet...</h1>
+    <div class="mx-auto text-center col-md-6 mt-5">
+      <img loading="lazy" src="{% static 'diary/img/sorry.png' %}" class="img-fluid rounded-circle"
+        alt="no profile public">
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

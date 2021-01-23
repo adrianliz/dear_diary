@@ -132,4 +132,8 @@ mejoras en el renderizado de los formularios y redirección del usuario en Landi
 - [:white_check_mark:] v0.10.0 -> footer
 - [:white_check_mark:] v1.0.0 -> gráfico evolución puntuaje "moods"
 ![v1.0.0](screenshots/v1.0.0.png)
-- - [:white_check_mark:] v1.1.0 -> estilos nuevos
+- [:white_check_mark:] v1.1.0 -> estilos nuevos
+- [:white_check_mark:] v1.2.0 -> ordenación dinámica de moods y añadida comunidad para ver los moods de los perfiles públicos
+![v1.2.0](screenshots/v1.2.0_sortby.png)
+![v1.2.0](screenshots/v1.2.0_profile.png)
+![v1.2.0](screenshots/v1.2.0_community.png)

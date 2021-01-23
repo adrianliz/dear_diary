@@ -1,5 +1,5 @@
 {% if is_paginated %}
-<nav aria-label="moods-pagination">
+<nav aria-label="pagination">
   <ul class="pagination justify-content-center mt-3">
     {% if page_obj.has_previous %}
     <li class="page-item">
@@ -18,7 +18,11 @@
     </li>
     {% else %}
     <li class="page-item">
+      {% if request.GET.sortby %}
+      <a class="page-link" href="?page={{ i }}&sortby={{ request.GET.sortby }}">{{ i }}</a>
+      {% else %}
       <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+      {% endif %}
     </li>
     {% endif %}
     {% endfor %}

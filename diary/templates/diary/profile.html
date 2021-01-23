@@ -1,4 +1,7 @@
 {% extends "diary/core/base.html" %}
+{% block title %}
+Dear Diary - Profile
+{% endblock %}
 
 {% block content %}
 {% include 'diary/core/navbar.html' %}
@@ -14,11 +17,24 @@
 
   <div class="row-sm-12 mb-5">
     <div class="card mx-auto shadow p-3 bg-white rounded-lg animated fadeIn">
+      <div class="text-right">
+        {% if profile.public %}
+        <span class="badge badge-pill badge-success">Public</span>
+        {% else %}
+        <span class="badge badge-pill badge-danger">Private</span>
+        {% endif %}
+      </div>
       <div class="mx-auto text-center col-md-6">
-        <img src="{{profile.avatar.url}}" class="img-fluid rounded-circle" alt="avatar">
+        <img loading="lazy" src="{{profile.avatar.url}}" class="img-fluid rounded-circle" alt="avatar">
       </div>
       <div class="card-body">
-        <h5 class="mt-0 text-center">Your profile</h5>
+        <h5 class="mt-0 text-center">Your profile
+          {% if profile.public %}
+          <i class="fas fa-unlock text-success"></i>
+          {% else %}
+          <i class="fas fa-lock text-danger"></i>
+          {% endif %}
+        </h5>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <div class="row row-cols-sm-2 p-2">
@@ -52,7 +68,7 @@
           </div>
           {% endif %}
         </ul>
-        <div class="text-right">
+        <div class="row flex-row-reverse">
           <a class="btn btn-info" href="{% url 'diary:edit_profile' profile.id %}">Edit</a>
         </div>
       </div>

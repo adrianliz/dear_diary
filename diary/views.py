@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
 from django.utils import timezone
+from django.utils.html import escape
 from django.views import View
 from django.views.generic import ListView, DeleteView, CreateView, UpdateView, TemplateView, FormView
 from django.contrib.auth import authenticate, login, logout
@@ -10,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.messages.views import SuccessMessageMixin
-from django.db.models import Avg
+from django.db.models import Avg, Count
 
 from .models import Mood, Profile
 from .forms import RegisterForm, MoodForm, ProfileForm, ContactForm
@@ -72,13 +73,27 @@ def logout_view(request):
     return HttpResponseRedirect(reverse('diary:landing'))
 
 
+def validate_sortby(sortby):
+    if (sortby != 'name' and sortby != '-score'):
+        return '-updated_on'
+    else:
+        return sortby
+
+
 class DashboardView(LoginRequiredMixin, ListView):
     template_name = 'diary/dashboard.html'
     context_object_name = 'moods'
     paginate_by = 5
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['allow_crud'] = True
+        context['username'] = self.request.user
+        return context
+
     def get_queryset(self):
-        return Mood.objects.filter(user=self.request.user).order_by('-updated_on')
+        sortby = validate_sortby(escape(self.request.GET.get('sortby')))
+        return Mood.objects.filter(user=self.request.user).order_by(sortby)
 
 
 class CreateMoodView(LoginRequiredMixin, CreateView):
@@ -188,3 +203,42 @@ class EvolutionView(LoginRequiredMixin, TemplateView):
         context['avg_scores'] = Mood.objects.filter(
             user=self.request.user).values('updated_on__date').annotate(avg=Avg('score'))
         return context
+
+
+class CommunityView(LoginRequiredMixin, ListView):
+    template_name = 'diary/community.html'
+    context_object_name = 'profiles'
+    paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['moods_count'] = Mood.objects.values('user').annotate(
+            count=Count('user'))
+        return context
+
+    def get_queryset(self):
+        return Profile.objects.exclude(user=self.request.user).order_by('user')
+
+
+class CommunityUserView(LoginRequiredMixin, ListView):
+    template_name = 'diary/dashboard.html'
+    context_object_name = 'moods'
+    paginate_by = 5
+
+    def dispatch(self, request, *args, **kwargs):
+        profile = Profile.objects.filter(user=self.kwargs['pk'])[0]
+        if (not profile.public) or (profile.user == request.user):
+            return HttpResponseRedirect(reverse('diary:community'))
+        else:
+            return super(CommunityUserView, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['allow_crud'] = False
+        context['username'] = Profile.objects.filter(
+            user=self.kwargs['pk'])[0].user
+        return context
+
+    def get_queryset(self):
+        sortby = validate_sortby(escape(self.request.GET.get('sortby')))
+        return Mood.objects.filter(user=self.kwargs['pk']).order_by(sortby)

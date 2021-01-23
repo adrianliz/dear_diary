@@ -1,10 +1,15 @@
 {% load static %}
+
 <!doctype html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- SEO -->
+  <meta name="keywords" content="digital diary, dear diary">
+  <meta name="description" content="Dear diary is a digital diary where you can post your sentimental moods and visualize your personal evolution">
 
   <link rel="shortcut icon" href="{% static 'favicon/favicon.ico' %}">
 
@@ -18,7 +23,10 @@
   <!-- Custom styles -->
   <link rel="stylesheet" href="{% static 'diary/css/style.css' %}">
 
-  <title>Dear Diary</title>
+  <title>
+    {% block title %}
+    {% endblock %}
+  </title>
 </head>
 
 <body class="d-flex flex-column vh-100 background-pattern">

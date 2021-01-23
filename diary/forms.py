@@ -20,7 +20,7 @@ class MoodForm(ModelForm):
         fields = ['name', 'description', 'score']
         widgets = {
             'description': forms.Textarea(attrs={'rows': 5}),
-            'score': forms.TextInput(attrs={'class': 'form-control-range', 'type': 'range',
+            'score': forms.TextInput(attrs={'class': 'custom-range', 'type': 'range',
                                             'min': 1, 'max': 5})
         }
 
@@ -28,7 +28,7 @@ class MoodForm(ModelForm):
 class ProfileForm(ModelForm):
     class Meta:
         model = Profile
-        fields = ['avatar', 'birth_date', 'address', 'gender']
+        fields = ['avatar', 'birth_date', 'address', 'gender', 'public']
         widgets = {
             'avatar': forms.FileInput(attrs={'class': 'custom-file-input'}),
             'birth_date': forms.DateInput(format=('%Y-%m-%d'),

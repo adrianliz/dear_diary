@@ -4,21 +4,36 @@
   <div class="col-12">
     <form method="POST" enctype="multipart/form-data" action="">
       {% csrf_token %}
+      {% if form_name %}
       <div class="div mb-4">
-        <h1 class="display-3 font-weight-bold">{{form_name}}</h1>
+        <h1 class="display-3 font-weight-bold">{{form_name | safe}}</h1>
       </div>
+      {% endif %}
       {% for field in form %}
       <div class="form-group font-weight-bold">
         <label for="{{ field.id_for_label }}">{{ field.label }}</label>
 
         {% with field_type=field.field.widget.input_type %}
         {% if field_type == "range" %}
-        {{ field }}
+        {% render_field field id="rangeInput" %}
+        <span id="rangeValue" class="badge badge-pill badge-primary"></span>
+
+        <script>
+          var slider = document.getElementById("rangeInput");
+          var output = document.getElementById("rangeValue");
+          output.innerHTML = slider.value;
+
+          slider.oninput = function () {
+            output.innerHTML = slider.value;
+          }
+        </script>
         {% elif field_type == "file" %}
         <div class="custom-file">
           {{ field }}
           <label class="custom-file-label" for="{{ field.id_for_label }}">Choose file</label>
         </div>
+        {% elif field_type == "checkbox" %}
+        {{ field }}
         {% else %}
         {% render_field field placeholder=field.label class+="form-control" %}
         {% endif %}
@@ -26,7 +41,7 @@
       </div>
       {% endfor %}
       <div class="text-right mb-3">
-        <button type="submit" class="btn btn-primary">{{form_name}}</button>
+        <button type="submit" class="btn btn-primary">{{form_name | safe}}</button>
       </div>
     </form>
   </div>
