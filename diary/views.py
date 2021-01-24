@@ -212,7 +212,9 @@ class CommunityView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['moods_count'] = Mood.objects.values('user').annotate(
+        # Solo los usuarios con perfil público y que no sean el propio usuario
+        target_users = Profile.objects.exclude(user=self.request.user).filter(public=True).values('user')
+        context['moods_count'] = Mood.objects.filter(user__in=target_users).values('user').annotate(
             count=Count('user'))
         return context
 
@@ -227,6 +229,7 @@ class CommunityUserView(LoginRequiredMixin, ListView):
 
     def dispatch(self, request, *args, **kwargs):
         profile = Profile.objects.filter(user=self.kwargs['pk'])[0]
+        # No permito el acceso si el perfil no es público o es el perfil del propio usuario
         if (not profile.public) or (profile.user == request.user):
             return HttpResponseRedirect(reverse('diary:community'))
         else:

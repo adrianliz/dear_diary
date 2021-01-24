@@ -137,3 +137,4 @@ mejoras en el renderizado de los formularios y redirección del usuario en Landi
 ![v1.2.0](screenshots/v1.2.0_sortby.png)
 ![v1.2.0](screenshots/v1.2.0_profile.png)
 ![v1.2.0](screenshots/v1.2.0_community.png)
+- [:white_check_mark:] v1.2.1 -> corrección de erratas, mejorado del diseño responsive y la carga de imágenes (formato webp)

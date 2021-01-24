@@ -2,27 +2,43 @@
 {% load static %}
 {% load filters %}
 {% block title %}
-Dear Diary - Comunity
+Dear Diary - Community
 {% endblock %}
 
 {% block content %}
 {% include 'diary/core/navbar.html' %}
 <div class="container mt-3">
   {% if profiles|length > 0 %}
-  {% include 'diary/core/pagination.html' %}
   <h1 class="display-4 text-center font-weight-bold my-3">
     Community
     <i class="fas fa-user-circle text-primary"></i>
   </h1>
-  <div class="card-columns d-inline-block animated fadeIn mb-5">
+  {% include 'diary/core/pagination.html' %}
+  <div class="card-columns mb-5 animated fadeIn">
     {% for profile in profiles %}
-    <div class="card shadow p-3 bg-white rounded-lg">
+    <div class="card shadow p-3 mb-4 bg-white rounded-lg">
+      <div class="row">
+        <div class="col-6">
+          <div class="text-left">
+            <span class="badge badge-pill badge-primary">Last login on {{ profile.user.last_login | date:"d/m/Y H:i"}}</span>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="text-right">
+            {% if profile.public %}
+            <span class="badge badge-pill badge-success">Public</span>
+            {% else %}
+            <span class="badge badge-pill badge-danger">Private</span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
       <img loading="lazy" src="{{profile.avatar.url}}" class="p-3 card-img-top rounded-circle" alt="{{profile.user}}">
       <div class="card-body">
         <h5 class="card-title text-center">{{profile.user}}</h5>
         <div class="text-center mt-4">
           {% if profile.public %}
-          <a href="{% url 'diary:community-user' profile.user.id %}" class="btn btn-primary stretched-link">Show
+          <a href="{% url 'diary:community-user' profile.user.id %}" class="btn btn-success stretched-link">Show
             moods
             <span class="badge badge-light ml-1">{{moods_count | get_mood_count:profile.user.id}}</span>
           </a>
@@ -36,10 +52,10 @@ Dear Diary - Comunity
   </div>
   {% else %}
   <div class="text-center mb-5">
-    <h1 class="display-4 font-weight-bold">No public profile yet...</h1>
+    <h1 class="display-4 font-weight-bold">No community yet...</h1>
     <div class="mx-auto text-center col-md-6 mt-5">
-      <img loading="lazy" src="{% static 'diary/img/sorry.png' %}" class="img-fluid rounded-circle"
-        alt="no profile public">
+      <img loading="lazy" src="{% static 'diary/img/sorry.webp' %}" class="img-fluid rounded-circle"
+        alt="no community yet">
     </div>
   </div>
   {% endif %}
