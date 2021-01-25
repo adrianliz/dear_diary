@@ -1,0 +1,20 @@
+body {
+  background-color: #121212;
+  color: #eeeeee;
+  opacity: 1;
+  background-image: radial-gradient(#eeeeee 1px, transparent 1px), radial-gradient(#eeeeee 1px, #121212 1px);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+}
+
+a, a:hover {
+  color: #eeeeee;
+}
+
+.card {
+  background-color: #121212;
+}
+
+.list-group-item {
+  background-color: #121212;
+}

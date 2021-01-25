@@ -8,7 +8,11 @@ Dear Diary
 <div class="container my-5">
   <div class="row">
     <div class="col-md-8">
-      <div class="card shadow p-3 mb-5 bg-white rounded-lg animated fadeIn mx-auto">
+      <div class="text-center mb-3">
+        {% include 'diary/core/toggle-theme.html' %}
+      </div>
+
+      <div class="card shadow p-3 mb-5 rounded-lg animated fadeIn mx-auto">
         <img loading="lazy" src="{% static 'diary/img/diary.webp' %}" class="img-fluid rounded-circle" alt="diary">
         <div class="card-body text-center">
           <h1 class="card-title display-1 font-weight-bold">Dear Diary</h1>

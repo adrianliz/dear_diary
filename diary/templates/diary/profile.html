@@ -16,7 +16,7 @@ Dear Diary - Profile
   </div>
 
   <div class="row-sm-12 mb-5">
-    <div class="card mx-auto shadow p-3 bg-white rounded-lg animated fadeIn">
+    <div class="card mx-auto shadow p-3 rounded-lg animated fadeIn">
       <div class="text-right">
         {% if profile.public %}
         <span class="badge badge-pill badge-success">Public</span>
@@ -36,19 +36,19 @@ Dear Diary - Profile
           {% endif %}
         </h5>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">
+          <li class="list-group-item font-weight-bold">
             <div class="row row-cols-sm-2 p-2">
               <span class="text-muted mr-5">Email</span>
               {{profile.user.email}}
             </div>
           </li>
-          <li class="list-group-item">
+          <li class="list-group-item font-weight-bold">
             <div class="row row-cols-sm-2 p-2">
               <span class="text-muted mr-5">Birth date</span>
               {{profile.birth_date | date:"d/m/Y"}}
             </div>
           </li>
-          <li class="list-group-item">
+          <li class="list-group-item font-weight-bold">
             <div class="row row-cols-sm-2 p-2 overflow-auto">
               <span class="text-muted mr-5">Address</span>
               {{profile.address}}

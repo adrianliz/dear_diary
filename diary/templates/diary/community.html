@@ -16,24 +16,23 @@ Dear Diary - Community
   {% include 'diary/core/pagination.html' %}
   <div class="card-columns mb-5 animated fadeIn">
     {% for profile in profiles %}
-    <div class="card shadow p-3 mb-4 bg-white rounded-lg">
+    <div class="card shadow p-3 mb-4 rounded-lg">
       <div class="row">
-        <div class="col-6">
-          <div class="text-left">
-            <span class="badge badge-pill badge-primary">Last login on {{ profile.user.last_login | date:"d/m/Y H:i"}}</span>
-          </div>
+        <div class="col text-left">
+          <span class="badge badge-pill badge-primary">
+            Last login on {{ profile.user.last_login | date:"d/m/Y H:i"}}
+          </span>
         </div>
-        <div class="col-6">
-          <div class="text-right">
-            {% if profile.public %}
-            <span class="badge badge-pill badge-success">Public</span>
-            {% else %}
-            <span class="badge badge-pill badge-danger">Private</span>
-            {% endif %}
-          </div>
+        <div class="col text-right">
+          {% if profile.public %}
+          <span class="badge badge-pill badge-success">Public</span>
+          {% else %}
+          <span class="badge badge-pill badge-danger">Private</span>
+          {% endif %}
         </div>
       </div>
       <img loading="lazy" src="{{profile.avatar.url}}" class="p-3 card-img-top rounded-circle" alt="{{profile.user}}">
+
       <div class="card-body">
         <h5 class="card-title text-center">{{profile.user}}</h5>
         <div class="text-center mt-4">
