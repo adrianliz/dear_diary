@@ -16,7 +16,6 @@ if (currentTheme == DARK_THEME) {
 }
 
 toggleIcon.addEventListener("click", () => {
-  const currentTheme = localStorage.getItem("theme");
   let newTheme;
 
   if (currentTheme == DARK_THEME) {

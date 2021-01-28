@@ -11,9 +11,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.messages.views import SuccessMessageMixin
-from django.db.models import Avg, Count
+from django.db.models import Avg, Count, Sum
 
-from .models import Mood, Profile
+from .models import Mood, Profile, Advice
 from .forms import RegisterForm, MoodForm, ProfileForm, ContactForm
 
 
@@ -62,8 +62,7 @@ class SignupView(UserNotLoggedValidator, CreateView):
         return context
 
     def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
+        login(self.request, form.save())
         return HttpResponseRedirect(reverse('diary:dashboard'))
 
 
@@ -155,8 +154,8 @@ class ProfileView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
-        profile = Profile.objects.get_or_create(user=self.request.user)[0]
-        context['profile'] = profile
+        context['profile'] = Profile.objects.get_or_create(
+            user=self.request.user)[0]
         return context
 
 
@@ -213,7 +212,8 @@ class CommunityView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # Solo los usuarios con perfil público y que no sean el propio usuario
-        target_users = Profile.objects.exclude(user=self.request.user).filter(public=True).values('user')
+        target_users = Profile.objects.exclude(
+            user=self.request.user).filter(public=True).values('user')
         context['moods_count'] = Mood.objects.filter(user__in=target_users).values('user').annotate(
             count=Count('user'))
         return context
@@ -245,3 +245,36 @@ class CommunityUserView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         sortby = validate_sortby(escape(self.request.GET.get('sortby')))
         return Mood.objects.filter(user=self.kwargs['pk']).order_by(sortby)
+
+
+def validate_ranking(ranking):
+    if (ranking != 'moods' and ranking != 'score'):
+        return 'moods'
+    else:
+        return ranking
+
+
+class RankingView(LoginRequiredMixin, TemplateView):
+    template_name = 'diary/ranking.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["ranking_type"] = validate_ranking(
+            escape(self.request.GET.get('ranking')))
+
+        users_moods = Mood.objects.values('user__username')
+        if context["ranking_type"] == "moods":
+            context["user_ranking"] = users_moods.annotate(
+                value=Count('user__username')).order_by('-value')[:10]
+        else:
+            context["user_ranking"] = users_moods.annotate(
+                value=Sum('score')).order_by('-value')[:10]
+        return context
+
+
+class AdvicesView(LoginRequiredMixin, ListView):
+    context_object_name = 'advices'
+    template_name = 'diary/advices.html'
+
+    def get_queryset(self):
+        return Advice.objects.values()

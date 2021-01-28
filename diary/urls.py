@@ -1,7 +1,8 @@
 from django.urls import path
 from diary.views import LandingView, SignupView, DashboardView, \
     DeleteMoodView, CreateMoodView, EditMoodView, ProfileView, \
-    EditProfileView, ContactView, EvolutionView, CommunityView, CommunityUserView, logout_view
+    EditProfileView, ContactView, EvolutionView, CommunityView, \
+    RankingView, CommunityUserView, AdvicesView, logout_view
 
 app_name = 'diary'
 urlpatterns = [
@@ -17,5 +18,7 @@ urlpatterns = [
     path('contact/', ContactView.as_view(), name="contact"),
     path('evolution/', EvolutionView.as_view(), name="evolution"),
     path('community/', CommunityView.as_view(), name="community"),
-    path('community/<int:pk>', CommunityUserView.as_view(), name="community-user")
+    path('ranking/', RankingView.as_view(), name="ranking"),
+    path('community/<int:pk>', CommunityUserView.as_view(), name="community-user"),
+    path('advices/', AdvicesView.as_view(), name="advices")
 ]

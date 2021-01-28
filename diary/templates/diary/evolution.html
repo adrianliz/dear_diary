@@ -1,4 +1,5 @@
 {% extends "diary/core/base.html" %}
+
 {% block title %}
 Dear Diary - Evolution
 {% endblock %}
@@ -16,16 +17,13 @@ Dear Diary - Evolution
 
       <ul class="list-group list-group-flush text-center mt-4">
         <li class="list-group-item font-weight-bold">
-          <p>Do exercise</p>
+          <p>Keep it up {{ request.user }}!</p>
         </li>
         <li class="list-group-item font-weight-bold">
-          <p>Sleep 8 hours every day</p>
+          <p>What await us tomorrow?</p>
         </li>
         <li class="list-group-item font-weight-bold">
-          <p>Do something you like every day</p>
-        </li>
-        <li class="list-group-item font-weight-bold">
-          <p>Accept yourself</p>
+          <p>You are doing great!</p>
         </li>
       </ul>
     </div>

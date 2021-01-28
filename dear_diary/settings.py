@@ -2,14 +2,13 @@ from pathlib import Path
 import os
 import environ
 
-# Read .env file
+# Se lee el fichero .env
 env = environ.Env(
     DEBUG=(bool, False),
     ALLOWED_HOSTS=(list, []),
 )
 environ.Env.read_env()
 
-# Config variables
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = env.str('SECRET_KEY')
@@ -18,7 +17,10 @@ DEBUG = env.bool('DEBUG')
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
-# Application definition
+# Tiempo de sesión
+SESSION_COOKIE_AGE = 1800  # s
+
+# Aplicaciones
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -27,7 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'diary.apps.DiaryConfig',
-    'widget_tweaks',
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
@@ -60,14 +62,12 @@ TEMPLATES = [
     },
 ]
 
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+# Base de datos
 DATABASES = {
     'default': env.db('SQLITE_URL')
 }
 
-# Password validation
-# https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
+# Validación de las contraseñas
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -83,25 +83,24 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/3.1/topics/i18n/
+# Internacionalización
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Europe/Madrid'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-# Login page
+# Página de Login
 LOGIN_URL = '/'
 
-# Static files
+# Ficheros estáticos
 STATIC_ROOT = os.path.abspath(env.str('STATIC_ROOT', ""))
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 STATIC_URL = '/static/'
 
-# Media files
+# Media
 MEDIA_ROOT = os.path.abspath(
     env.str('MEDIA_ROOT', os.path.join(BASE_DIR, 'media')))
 MEDIA_URL = '/media/'

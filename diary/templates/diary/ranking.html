@@ -1,0 +1,47 @@
+{% extends "diary/core/base.html" %}
+{% load static %}
+
+{% block title %}
+Dear Diary - Ranking
+{% endblock %}
+
+{% block content %}
+{% include 'diary/core/navbar.html' %}
+<div class="container mt-3">
+  <h1 class="display-4 text-center font-weight-bold my-3">
+    Ranking
+    <i class="fas fa-chart-line"></i>
+    <div class="dropdown">
+      <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Top 10 users with
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="?ranking=moods">More moods published</a>
+        <a class="dropdown-item" href="?ranking=score">More score</a>
+      </div>
+    </div>
+  </h1>
+
+  <div class="table-responsive rounded-lg animated fadeIn mb-5">
+    <table class="table table-striped text-center">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Username</th>
+          <th scope="col">{{ ranking_type | title }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for ranking in user_ranking %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ ranking.user__username }}</td>
+          <td>{{ ranking.value }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

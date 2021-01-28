@@ -16,6 +16,8 @@
     {% url 'diary:contact' as contact_url %}
     {% url 'diary:evolution' as evolution_url %}
     {% url 'diary:community' as community_url %}
+    {% url 'diary:ranking' as ranking_url %}
+    {% url 'diary:advices' as advices_url %}
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link {% if request.path == dashboard_url %}active font-weight-bold{% endif %}"
@@ -33,11 +35,19 @@
         <a class="nav-link {% if request.path == evolution_url %}active font-weight-bold{% endif %}"
         href="{{evolution_url}}">My evolution</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link {% if request.path == advices_url %}active font-weight-bold{% endif %}"
+        href="{{advices_url}}">Advices</a>
+      </li>
     </ul>
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link {% if request.path == community_url %}active font-weight-bold{% endif %}"
         href="{{community_url}}">Community</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if request.path == ranking_url %}active font-weight-bold{% endif %}"
+        href="{{ranking_url}}">Ranking</a>
       </li>
       <li class="nav-item">
         <a class="nav-link {% if request.path == contact_url %}active font-weight-bold{% endif %}"

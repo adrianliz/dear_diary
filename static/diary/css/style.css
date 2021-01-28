@@ -1,59 +1,85 @@
 * {
-	font-family: 'Nunito', sans-serif;
+  font-family: 'Nunito', sans-serif;
 }
 
 .link-zoom:hover {
-	font-size: 1.1rem;
+  font-size: 1.1rem;
 }
 
 .skin-color {
-	color: #f1c27d;
+  color: #f1c27d;
 }
 
-/* Card columns count */
+/* Notas adhesivas */
 
-/* Small screens */
+.sticky-note {
+  position: relative;
+  color: #121212;
+  background: #FFFF88;
+  box-shadow: -2px 2px 5px -2px #888888;
+}
+
+.sticky-note:before, .sticky-note:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 0;
+  right: 0;
+}
+
+.sticky-note:after {
+  border-bottom: solid 8px #fafa06;
+  border-left: solid 8px #fafa06;
+  border-right: solid 8px transparent;
+  border-top: solid 8px transparent;
+}
+
+/* Columnas pora card-columns dependiendo del ancho de pantalla */
+
+/* Pantallas pequeñas */
 
 @media (min-width: 576px) {
-	.card-columns {
-		column-count: 2;
-	}
+  .card-columns {
+    column-count: 2;
+  }
 }
 
-/* Medium screens */
+/* Pantallas medianas */
 
 @media (min-width: 768px) {
-	.card-columns {
-		column-count: 2;
-	}
+  .card-columns {
+    column-count: 2;
+  }
 }
 
-/* Large screens */
+/* Pantallas grandes */
 
 @media (min-width: 992px) {
-	.card-columns {
-		column-count: 3;
-	}
+  .card-columns {
+    column-count: 3;
+  }
 }
 
-/* Animations */
+/* Animaciones */
 
 .animated {
-	-webkit-animation-duration: 1.5s;
-	animation-duration: 1.5s;
-	-webkit-animation-fill-mode: both;
-	animation-fill-mode: both;
+  -webkit-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
 }
 
 @keyframes fadeIn {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .fadeIn {
-	animation-name: fadeIn;
+  animation-name: fadeIn;
 }

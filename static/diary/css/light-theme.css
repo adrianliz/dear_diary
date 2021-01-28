@@ -5,3 +5,17 @@ body {
   background-size: 40px 40px;
   background-position: 0 0, 20px 20px;
 }
+
+.table {
+  color: #121212;
+  background-color: #fbfbfb;
+}
+
+/* Notas adhesivas */
+
+.sticky-note:before {
+  border-top: solid 8px #fbfbfb;
+  border-right: solid 8px #fbfbfb;
+  border-left: solid 8px transparent;
+  border-bottom: solid 8px transparent;
+}
