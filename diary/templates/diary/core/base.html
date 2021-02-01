@@ -9,8 +9,10 @@
 
   <!-- SEO -->
   <meta name="keywords" content="digital diary, dear diary">
-  <meta name="description" content="Dear diary is a digital diary where you can post your sentimental moods and visualize your personal evolution">
-  <meta property="og:description" content="Dear diary is a digital diary where you can post your sentimental moods and visualize your personal evolution">
+  <meta name="description"
+    content="Dear diary is a digital diary where you can post your sentimental moods and visualize your personal evolution">
+  <meta property="og:description"
+    content="Dear diary is a digital diary where you can post your sentimental moods and visualize your personal evolution">
   <link rel="canonical" href="http://dear-diary.ml">
 
   <!-- Favicon -->
@@ -19,7 +21,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="{% static 'diary/css/bootstrap.min.css' %}">
 
-  <!-- Custom font -->
+  <!-- Nunito Font -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400&display=swap" rel="stylesheet">
 
@@ -27,13 +29,16 @@
   <link rel="stylesheet" href="{% static 'diary/css/style.css' %}">
   <link id="theme-link" rel="stylesheet">
 
+  <!-- Animations -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
   <title>
     {% block title %}
     {% endblock %}
   </title>
 </head>
 
-<body class="d-flex flex-column vh-100">
+<body class="d-flex flex-column min-vh-100">
   {% block content %}
   {% endblock %}
 
@@ -42,6 +47,12 @@
   <script src="{% static 'diary/js/jquery-3.5.1.min.js' %}"></script>
   <script src="{% static 'diary/js/bootstrap.bundle.min.js' %}"></script>
   <script src="https://kit.fontawesome.com/4ec8e7ab5d.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1200,
+    });
+  </script>
 
   {% block custom_scripts %}
   {% endblock %}

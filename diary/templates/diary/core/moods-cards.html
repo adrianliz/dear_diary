@@ -1,16 +1,16 @@
-<div class="row row-cols-1 row-cols-md-2 mb-5 animated fadeIn">
+<div class="row row-cols-1 row-cols-md-2 mb-5">
   {% for mood in moods %}
   <div class="col my-3">
-    <div class="card h-100 shadow rounded-lg">
+    <div class="card h-100 shadow rounded-lg" data-aos="zoom-in">
       <div class="card-body">
         <h1 class="card-title display-4 mb-4 text-break">
           <i class="ml-2 far fa-bookmark"></i>
-          {{mood.name}}
+          {{ mood.name }}
         </h1>
         <h5>Description <i class="ml-2 fas fa-feather"></i></h5>
-        <hr class="m-0" />
-        <p class="card-title overflow-auto">{{mood.description}}</p>
-        <p class="card-text">
+        <hr class="mt-0">
+        <p class="card-title text-justify">{{ mood.description }}</p>
+        <p class="card-text" data-aos="fade-right">
           {% with ''|center:mood.score as range %}
           {% for _ in range %}
           <i class="far fa-smile-beam text-warning"></i>

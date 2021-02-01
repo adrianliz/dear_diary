@@ -6,12 +6,12 @@ Dear Diary - Evolution
 
 {% block content %}
 {% include 'diary/core/navbar.html' %}
-<div class="container mt-3">
-  <h1 class="display-4 font-weight-bold text-center mb-4">
+<div class="container">
+  <h1 class="display-4 font-weight-bold text-center mb-3">
     My evolution
     <i class="fas fa-seedling text-success"></i>
   </h1>
-  <div class="card shadow mb-5 p-3 rounded-lg animated fadeIn">
+  <div class="card shadow mb-5 p-3 rounded-lg" data-aos="zoom-in">
     <div class="card-body">
       <canvas id="chart"></canvas>
 
@@ -20,10 +20,10 @@ Dear Diary - Evolution
           <p>Keep it up {{ request.user }}!</p>
         </li>
         <li class="list-group-item font-weight-bold">
-          <p>What await us tomorrow?</p>
+          <p>Awesome evolution {{ request.user }}!</p>
         </li>
         <li class="list-group-item font-weight-bold">
-          <p>You are doing great!</p>
+          <p>You are doing great {{ request.user }}!</p>
         </li>
       </ul>
     </div>

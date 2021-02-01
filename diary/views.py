@@ -19,7 +19,6 @@ from .forms import RegisterForm, MoodForm, ProfileForm, ContactForm
 
 class UserNotLoggedValidator(UserPassesTestMixin):
     def test_func(self):
-        # Únicamente cuando el usuario NO esté autenticado
         return not self.request.user.is_authenticated
 
     def handle_no_permission(self):
@@ -52,7 +51,7 @@ class SignupView(UserNotLoggedValidator, CreateView):
     model = User
     form_class = RegisterForm
     success_url = reverse_lazy('diary:dashboard')
-    template_name = 'diary/core/page_form.html'
+    template_name = 'diary/core/page-form.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -82,7 +81,7 @@ def validate_sortby(sortby):
 class DashboardView(LoginRequiredMixin, ListView):
     template_name = 'diary/dashboard.html'
     context_object_name = 'moods'
-    paginate_by = 5
+    paginate_by = 6
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -99,7 +98,7 @@ class CreateMoodView(LoginRequiredMixin, CreateView):
     model = Mood
     form_class = MoodForm
     success_url = reverse_lazy('diary:dashboard')
-    template_name = 'diary/core/page_form.html'
+    template_name = 'diary/core/page-form.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -132,7 +131,7 @@ class EditMoodView(LoginRequiredMixin, OwnershipValidator, UpdateView):
     model = Mood
     form_class = MoodForm
     success_url = reverse_lazy('diary:dashboard')
-    template_name = 'diary/core/page_form.html'
+    template_name = 'diary/core/page-form.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -163,7 +162,7 @@ class EditProfileView(LoginRequiredMixin, OwnershipValidator, UpdateView):
     model = Profile
     form_class = ProfileForm
     success_url = reverse_lazy('diary:profile')
-    template_name = 'diary/core/page_form.html'
+    template_name = 'diary/core/page-form.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -175,7 +174,7 @@ class EditProfileView(LoginRequiredMixin, OwnershipValidator, UpdateView):
 
 class ContactView(LoginRequiredMixin, SuccessMessageMixin, FormView):
     form_class = ContactForm
-    template_name = 'diary/core/page_form.html'
+    template_name = 'diary/core/page-form.html'
     success_message = 'Message sent correctly'
     success_url = reverse_lazy('diary:dashboard')
 
@@ -207,11 +206,11 @@ class EvolutionView(LoginRequiredMixin, TemplateView):
 class CommunityView(LoginRequiredMixin, ListView):
     template_name = 'diary/community.html'
     context_object_name = 'profiles'
-    paginate_by = 5
+    paginate_by = 6
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Solo los usuarios con perfil público y que no sean el propio usuario
+        # Only users with public profile
         target_users = Profile.objects.exclude(
             user=self.request.user).filter(public=True).values('user')
         context['moods_count'] = Mood.objects.filter(user__in=target_users).values('user').annotate(
@@ -225,11 +224,11 @@ class CommunityView(LoginRequiredMixin, ListView):
 class CommunityUserView(LoginRequiredMixin, ListView):
     template_name = 'diary/dashboard.html'
     context_object_name = 'moods'
-    paginate_by = 5
+    paginate_by = 6
 
     def dispatch(self, request, *args, **kwargs):
         profile = Profile.objects.filter(user=self.kwargs['pk'])[0]
-        # No permito el acceso si el perfil no es público o es el perfil del propio usuario
+        # Dispatch if profile is private or is the same profile
         if (not profile.public) or (profile.user == request.user):
             return HttpResponseRedirect(reverse('diary:community'))
         else:
@@ -272,9 +271,12 @@ class RankingView(LoginRequiredMixin, TemplateView):
         return context
 
 
-class AdvicesView(LoginRequiredMixin, ListView):
-    context_object_name = 'advices'
+class AdvicesView(LoginRequiredMixin, TemplateView):
     template_name = 'diary/advices.html'
 
-    def get_queryset(self):
-        return Advice.objects.values()
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['advices'] = Advice.objects.values(
+            'description', 'likes', 'user__username')
+
+        return context

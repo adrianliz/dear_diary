@@ -140,6 +140,7 @@ mejoras en el renderizado de los formularios y redirección del usuario en Landi
 - [:white_check_mark:] v1.2.1 -> corrección de erratas, mejorado del diseño responsive y la carga de imágenes (formato webp)
 - [:white_check_mark:] v1.3.0 -> dark theme y light theme toggle
 ![v1.3.0](screenshots/v1.3.0.png)
-- [:white_check_mark:] v1.4.0 -> Ranking, consejos y generación automática de datos fake
+- [:white_check_mark:] v1.4.0 -> ranking, consejos y generación automática de datos fake
 ![v1.4.0](screenshots/v1.4.0_ranking.png)
 ![v1.4.0](screenshots/v1.4.0_advices.png)
+- [:white_check_mark:] v1.4.1 -> mejoras visuales y corrección de erratas

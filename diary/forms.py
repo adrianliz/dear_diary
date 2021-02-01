@@ -34,7 +34,9 @@ class ProfileForm(ModelForm):
             'birth_date': forms.DateInput(format=('%Y-%m-%d'),
                                           attrs={'class': 'form-control',
                                                  'type': 'date'
-                                                 })
+                                                 }),
+            'public': forms.CheckboxInput(attrs={'class': 'form-check-input',
+                                                 'type': 'checkbox'})
         }
 
 

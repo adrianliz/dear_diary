@@ -2,13 +2,13 @@
 {% load static %}
 
 {% block title %}
-Dear Diary - Dashboard of {{username}}
+Dear Diary - Dashboard of {{ username }}
 {% endblock %}
 
 {% block content %}
 {% include 'diary/core/navbar.html' %}
-<div class="container mt-3">
-  {% include 'diary/core/success_messages.html' %}
+<div class="container">
+  {% include 'diary/core/success-messages.html' %}
 
   {% if moods|length > 0 %}
   {% include 'diary/core/pagination.html' %}
@@ -17,7 +17,7 @@ Dear Diary - Dashboard of {{username}}
   {% else %}
   <div class="text-center mb-5">
     <h1 class="display-4 font-weight-bold">No mood published yet...</h1>
-    <div class="mx-auto text-center col-md-6 mt-5">
+    <div class="mx-auto text-center col-md-6 mt-5" data-aos="zoom-in">
       <img src="{% static 'diary/img/nocontent.webp' %}" class="img-fluid rounded-circle" alt="no mood published">
     </div>
   </div>

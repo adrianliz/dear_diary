@@ -45,10 +45,10 @@ class ProfileFactory(DjangoModelFactory):
     user = factory.SubFactory(UserFactory)
 
 
-ADVICES = ["Do exercise", "Sleep 8 hours", "Do something you like every day", "Go outside each day",
-           "Love your related ones", "Eat healthy", "Focalize in yourself", "Go to pyschologyst"]
 class AdviceFactory(DjangoModelFactory):
     class Meta:
         model = Advice
 
-    description = factory.LazyAttribute(lambda x: random.choice(ADVICES))
+    description = factory.Faker('sentence', nb_words=2)
+    likes = factory.LazyAttribute(lambda x: random.randint(1, 20))
+    user = factory.SubFactory(UserFactory)

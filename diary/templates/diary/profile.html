@@ -6,18 +6,18 @@ Dear Diary - Profile
 
 {% block content %}
 {% include 'diary/core/navbar.html' %}
-<div class="container mt-3">
+<div class="container">
   <div class="row">
     <div class="col-sm-6 mx-auto">
-      <h1 class="display-4 font-weight-bold text-center my-3">
-        Hi {{profile.user}}
+      <h1 class="display-4 font-weight-bold text-center mb-3">
+        Hi {{ profile.user }}
         <i class="fas fa-id-card text-primary"></i>
       </h1>
     </div>
   </div>
 
   <div class="row-sm-12 mb-5">
-    <div class="card mx-auto shadow p-3 rounded-lg animated fadeIn">
+    <div class="card mx-auto shadow p-3 rounded-lg" data-aos="zoom-in">
       <div class="text-right">
         {% if profile.public %}
         <span class="badge badge-pill badge-success">Public</span>
@@ -26,7 +26,7 @@ Dear Diary - Profile
         {% endif %}
       </div>
       <div class="mx-auto text-center col-md-6">
-        <img loading="lazy" src="{{profile.avatar.url}}" class="img-fluid rounded-circle" alt="avatar">
+        <img loading="lazy" src="{{ profile.avatar.url }}" class="img-fluid rounded-circle" alt="avatar">
       </div>
       <div class="card-body">
         <h5 class="mt-0 text-center">Your profile
@@ -40,19 +40,19 @@ Dear Diary - Profile
           <li class="list-group-item font-weight-bold">
             <div class="row row-cols-sm-2 p-2">
               <span class="text-muted mr-5">Email</span>
-              {{profile.user.email}}
+              {{ profile.user.email }}
             </div>
           </li>
           <li class="list-group-item font-weight-bold">
             <div class="row row-cols-sm-2 p-2">
               <span class="text-muted mr-5">Birth date</span>
-              {{profile.birth_date | date:"d/m/Y"}}
+              {{ profile.birth_date | date:"d/m/Y" }}
             </div>
           </li>
           <li class="list-group-item font-weight-bold">
             <div class="row row-cols-sm-2 p-2 overflow-auto">
               <span class="text-muted mr-5">Address</span>
-              {{profile.address}}
+              {{ profile.address }}
             </div>
           </li>
           {% if profile.gender == 1 %}

@@ -8,20 +8,20 @@ Dear Diary - Community
 
 {% block content %}
 {% include 'diary/core/navbar.html' %}
-<div class="container mt-3">
+<div class="container">
   {% if profiles|length > 0 %}
-  <h1 class="display-4 text-center font-weight-bold my-3">
+  <h1 class="display-4 text-center font-weight-bold mb-3">
     Community
     <i class="fas fa-user-circle text-primary"></i>
   </h1>
   {% include 'diary/core/pagination.html' %}
-  <div class="card-columns mb-5 animated fadeIn">
+  <div class="card-columns mb-5">
     {% for profile in profiles %}
-    <div class="card shadow p-3 mb-4 rounded-lg">
+    <div class="card shadow p-3 mb-4 rounded-lg" data-aos="zoom-in">
       <div class="row">
         <div class="col text-left">
           <span class="badge badge-pill badge-primary">
-            Last login on {{ profile.user.last_login | date:"d/m/Y H:i"}}
+            Last login on {{ profile.user.last_login | date:"d/m/Y H:i" }}
           </span>
         </div>
         <div class="col text-right">
@@ -32,15 +32,16 @@ Dear Diary - Community
           {% endif %}
         </div>
       </div>
-      <img loading="lazy" src="{{profile.avatar.url}}" class="p-3 card-img-top rounded-circle" alt="{{profile.user}}">
+      <img loading="lazy" src="{{ profile.avatar.url }}" class="p-3 card-img-top rounded-circle"
+        alt="{{ profile.user }}">
 
       <div class="card-body">
-        <h5 class="card-title text-center">{{profile.user}}</h5>
+        <h5 class="card-title text-center">{{ profile.user }}</h5>
         <div class="text-center mt-4">
           {% if profile.public %}
-          <a href="{% url 'diary:community-user' profile.user.id %}" class="btn btn-success stretched-link">Show
+          <a href="{% url 'diary:community_user' profile.user.id %}" class="btn btn-success stretched-link">Show
             moods
-            <span class="badge badge-light ml-1">{{moods_count | get_mood_count:profile.user.id}}</span>
+            <span class="badge badge-light ml-1">{{ moods_count | get_mood_count:profile.user.id }}</span>
           </a>
           {% else %}
           <a class="btn btn-danger disabled">Profile is private</a>
@@ -53,7 +54,7 @@ Dear Diary - Community
   {% else %}
   <div class="text-center mb-5">
     <h1 class="display-4 font-weight-bold">No community yet...</h1>
-    <div class="mx-auto text-center col-md-6 mt-5">
+    <div class="mx-auto text-center col-md-6 mt-5" data-aos="zoom-in">
       <img loading="lazy" src="{% static 'diary/img/sorry.webp' %}" class="img-fluid rounded-circle"
         alt="no community yet">
     </div>

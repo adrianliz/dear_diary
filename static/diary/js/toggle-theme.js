@@ -17,6 +17,7 @@ if (currentTheme == DARK_THEME) {
 
 toggleIcon.addEventListener("click", () => {
   let newTheme;
+  const currentTheme = localStorage.getItem("theme");
 
   if (currentTheme == DARK_THEME) {
     theme.href = LIGHT_THEME_URL;
@@ -29,4 +30,4 @@ toggleIcon.addEventListener("click", () => {
   }
 
   localStorage.setItem("theme", newTheme);
-});
+})

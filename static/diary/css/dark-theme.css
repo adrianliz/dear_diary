@@ -16,19 +16,6 @@ a, a:hover {
   background-color: #121212;
 }
 
-.card {
+.card, .list-group-item {
   background-color: #121212;
-}
-
-.list-group-item {
-  background-color: #121212;
-}
-
-/* Notas adhesivas */
-
-.sticky-note:before {
-  border-top: solid 8px #121212;
-  border-right: solid 8px #121212;
-  border-left: solid 8px transparent;
-  border-bottom: solid 8px transparent;
 }

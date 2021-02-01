@@ -5,9 +5,10 @@ from django.core.management.base import BaseCommand
 
 from .factories import UserFactory, MoodFactory, ProfileFactory, AdviceFactory
 
-NUM_USERS = 10
+NUM_USERS = 20
 NUM_MOODS = 400
-NUM_ADVICES = 8
+NUM_ADVICES = 20
+
 
 class Command(BaseCommand):
     help = "Generates fake data for Dear Diary"
@@ -27,6 +28,7 @@ class Command(BaseCommand):
             MoodFactory(user=user)
 
         for _ in range(NUM_ADVICES):
-            AdviceFactory()
+            user = random.choice(users)
+            AdviceFactory(user=user)
 
         self.stdout.write("Fake data generated")

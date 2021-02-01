@@ -7,8 +7,12 @@ Dear Diary - Advices
 
 {% block content %}
 {% include 'diary/core/navbar.html' %}
-<div class="container mt-3">
-  <div id="carouselExampleControls" class="carousel slide shadow animated fadeIn mt-3" data-ride="carousel">
+<div class="container">
+  <h1 class="display-4 text-center font-weight-bold mb-3">
+    Advices
+    <i class="far fa-comment text-warning"></i>
+  </h1>
+  <div id="carouselExampleControls" class="carousel slide shadow" data-aos="zoom-in">
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="{% static 'diary/img/run.webp' %}" class="d-block w-100 rounded-lg img-responsive" alt="run">
@@ -32,11 +36,20 @@ Dear Diary - Advices
     </a>
   </div>
 
-  <div class="row row-cols-sm-1 row-cols-md-4 mt-3 mb-5 text-center">
+  <div class="row row-cols-sm-1 row-cols-md-4 mt-3 mb-5">
     {% for advice in advices %}
-    <div class="col-sm-12 col">
-      <div class="sticky-note p-5 mb-3 rounded-lg">
-        {{ advice.description }}
+    <div class="col-sm-12 mb-3">
+      <div class="sticky-note rounded-lg" data-aos="zoom-in">
+        <p class="font-weight-bold text-justify p-4">{{ advice.description }}</p>
+        <div class="row">
+          <div class="col text-left ml-2">
+            <b>{{ advice.likes }}</b> <i class="fas fa-thumbs-up text-danger"></i>
+          </div>
+
+          <div class="col font-italic text-muted text-right mr-2">
+            Written by {{ advice.user__username }}
+          </div>
+        </div>
       </div>
     </div>
     {% endfor %}

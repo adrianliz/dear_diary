@@ -19,6 +19,6 @@ urlpatterns = [
     path('evolution/', EvolutionView.as_view(), name="evolution"),
     path('community/', CommunityView.as_view(), name="community"),
     path('ranking/', RankingView.as_view(), name="ranking"),
-    path('community/<int:pk>', CommunityUserView.as_view(), name="community-user"),
+    path('community/<int:pk>', CommunityUserView.as_view(), name="community_user"),
     path('advices/', AdvicesView.as_view(), name="advices")
 ]

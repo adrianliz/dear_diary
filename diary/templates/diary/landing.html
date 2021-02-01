@@ -6,14 +6,20 @@ Dear Diary
 {% endblock %}
 
 {% block content %}
-<div class="container my-5">
+<div class="container my-3">
   <div class="row">
     <div class="col-md-8">
-      <div class="text-center mb-3">
-        {% include 'diary/core/toggle-theme.html' %}
+      <div class="d-flex justify-content-center">
+        <div class="box-options mb-3">
+          <ul>
+            <li>
+              {% include 'diary/core/toggle-theme.html' %}
+            </li>
+          </ul>
+        </div>
       </div>
 
-      <div class="card shadow p-3 mb-5 rounded-lg animated fadeIn mx-auto">
+      <div class="card shadow p-3 mb-md-3 rounded-lg mx-auto" data-aos="zoom-in">
         <img loading="lazy" src="{% static 'diary/img/diary.webp' %}" class="img-fluid rounded-circle" alt="diary">
         <div class="card-body text-center">
           <h1 class="card-title display-1 font-weight-bold">Dear Diary</h1>
@@ -22,10 +28,10 @@ Dear Diary
       </div>
     </div>
 
-    <div class="col-md-4 mt-3">
+    <div class="col-md-4 mt-3 mt-md-5">
       {% include 'diary/core/form.html' %}
 
-      <div class="text-right font-weight-bold mb-3">
+      <div class="text-right font-weight-bold mb-5">
         <a href="{% url 'diary:signup' %}" class="link-zoom text-decoration-none">Sign up now</a>
       </div>
     </div>

@@ -7,7 +7,6 @@ class Mood(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=300)
     score = models.IntegerField()
-    # Necesario para que se pueda editar vía admin ya que con auto_now no se permite
     updated_on = models.DateTimeField(default=timezone.now)
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -46,3 +45,6 @@ class ContactMessage(models.Model):
 
 class Advice(models.Model):
     description = models.CharField(max_length=50)
+    likes = models.IntegerField()
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
