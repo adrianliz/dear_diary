@@ -6,6 +6,9 @@
       {% if request.GET.sortby %}
       <a class="page-link font-weight-bold"
         href="?page={{ page_obj.previous_page_number }}&sortby={{ request.GET.sortby }}">&laquo;</a>
+      {% elif request.GET.search %}
+      <a class="page-link font-weight-bold"
+        href="?page={{ page_obj.previous_page_number }}&search={{ request.GET.search }}">&laquo;</a>
       {% else %}
       <a class="page-link font-weight-bold" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
       {% endif %}
@@ -21,31 +24,35 @@
     <li class="page-item active" aria-current="page">
       <a class="page-link font-weight-bold" href="#">{{ i }}<span class="sr-only">(current)</span></a>
     </li>
-    {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %}
-    <li class="page-item">
+    {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %} <li class="page-item">
       {% if request.GET.sortby %}
       <a class="page-link font-weight-bold" href="?page={{ i }}&sortby={{ request.GET.sortby }}">{{ i }}</a>
+      {% elif request.GET.search %}
+      <a class="page-link font-weight-bold" href="?page={{ i }}&search={{ request.GET.search }}">{{ i }}</a>
       {% else %}
       <a class="page-link font-weight-bold" href="?page={{ i }}">{{ i }}</a>
       {% endif %}
-    </li>
-    {% endif %}
-    {% endfor %}
-
-    {% if page_obj.has_next %}
-    <li class="page-item">
-      {% if request.GET.sortby %}
-      <a class="page-link font-weight-bold"
-        href="?page={{ page_obj.next_page_number }}&sortby={{ request.GET.sortby }}">&raquo;</a>
-      {% else %}
-      <a class="page-link font-weight-bold" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+      </li>
       {% endif %}
-    </li>
-    {% else %}
-    <li class="page-item disabled">
-      <a class="page-link font-weight-bold" href="#" tabindex="-1" aria-disabled="true">&raquo;</a>
-    </li>
-    {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+      <li class="page-item">
+        {% if request.GET.sortby %}
+        <a class="page-link font-weight-bold"
+          href="?page={{ page_obj.next_page_number }}&sortby={{ request.GET.sortby }}">&raquo;</a>
+        {% elif request.GET.search %}
+        <a class="page-link font-weight-bold"
+          href="?page={{ page_obj.next_page_number }}&search={{ request.GET.sortby }}">&raquo;</a>
+        {% else %}
+        <a class="page-link font-weight-bold" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+        {% endif %}
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <a class="page-link font-weight-bold" href="#" tabindex="-1" aria-disabled="true">&raquo;</a>
+      </li>
+      {% endif %}
   </ul>
 </nav>
 {% endif %}

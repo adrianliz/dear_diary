@@ -174,14 +174,13 @@ class EditProfileView(LoginRequiredMixin, OwnershipValidator, UpdateView):
 
 class ContactView(LoginRequiredMixin, SuccessMessageMixin, FormView):
     form_class = ContactForm
-    template_name = 'diary/core/page-form.html'
+    template_name = 'diary/contact.html'
     success_message = 'Message sent correctly'
     success_url = reverse_lazy('diary:dashboard')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form_name'] = "Contact"
-        context['include_navbar'] = True
         context['back_url'] = reverse('diary:dashboard')
         return context
 
@@ -218,7 +217,13 @@ class CommunityView(LoginRequiredMixin, ListView):
         return context
 
     def get_queryset(self):
-        return Profile.objects.exclude(user=self.request.user).order_by('user')
+        searchTerm = self.request.GET.get('search')
+        target_users = Profile.objects.exclude(user=self.request.user)
+
+        if (searchTerm != None):
+            return target_users.filter(user__username__icontains=searchTerm).order_by('user__username')
+        else:
+            return target_users.order_by('user__username')
 
 
 class CommunityUserView(LoginRequiredMixin, ListView):
@@ -271,12 +276,10 @@ class RankingView(LoginRequiredMixin, TemplateView):
         return context
 
 
-class AdvicesView(LoginRequiredMixin, TemplateView):
+class AdvicesView(LoginRequiredMixin, ListView):
     template_name = 'diary/advices.html'
+    context_object_name = 'advices'
+    paginate_by = 8
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['advices'] = Advice.objects.values(
-            'description', 'likes', 'user__username')
-
-        return context
+    def get_queryset(self):
+        return Advice.objects.values('description', 'likes', 'user__username')

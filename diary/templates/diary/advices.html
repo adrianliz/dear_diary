@@ -36,6 +36,11 @@ Dear Diary - Advices
     </a>
   </div>
 
+  {% if advices|length > 0 %}
+  <div class="my-3">
+    {% include 'diary/core/pagination.html' %}
+  </div>
+  {% endif %}
   <div class="row row-cols-sm-1 row-cols-md-4 mt-3 mb-5">
     {% for advice in advices %}
     <div class="col-sm-12 mb-3">

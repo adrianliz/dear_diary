@@ -15,6 +15,7 @@ Dear Diary - Community
     <i class="fas fa-user-circle text-primary"></i>
   </h1>
   {% include 'diary/core/pagination.html' %}
+  {% include 'diary/core/search-bar.html' %}
   <div class="card-columns mb-5">
     {% for profile in profiles %}
     <div class="card shadow p-3 mb-4 rounded-lg" data-aos="zoom-in">
@@ -53,7 +54,7 @@ Dear Diary - Community
   </div>
   {% else %}
   <div class="text-center mb-5">
-    <h1 class="display-4 font-weight-bold">No community yet...</h1>
+    <h1 class="display-4 font-weight-bold">No profile found</h1>
     <div class="mx-auto text-center col-md-6 mt-5" data-aos="zoom-in">
       <img loading="lazy" src="{% static 'diary/img/sorry.webp' %}" class="img-fluid rounded-circle"
         alt="no community yet">

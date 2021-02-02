@@ -1,0 +1,31 @@
+{% extends "diary/core/base.html" %}
+
+{% block title %}
+Dear Diary - Contact
+{% endblock %}
+
+{% block content %}
+{% include 'diary/core/navbar.html' %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      {% include 'diary/core/form.html' %}
+    </div>
+    <div class="col-md-6 text-center">
+      <h1 class="font-weight-bold text-center text-break mt-3">
+        University of Zaragoza - EUPT
+      </h1>
+      <h5 class="">Visit us at C/ Atarazana, 2, 44003 - Teruel</h5>
+      <p class="lead">or</p>
+      <a class="btn btn-info" href="tel:978-61-81-02">
+        Call us <i class="fas fa-phone ml-2"></i>
+      </a>
+
+      <div class="embed-responsive embed-responsive-16by9 shadow p-3 rounded-lg mb-5 mt-3">
+        <iframe class="embed-responsive-item"
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12162.288338393644!2d-1.10913!3d40.3518377!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x432f60a38244588b!2sEscuela%20Universitaria%20Polit%C3%A9cnica%20-%20Teruel%20(Universidad%20Zaragoza).!5e0!3m2!1ses!2ses!4v1612265803467!5m2!1ses!2ses"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
