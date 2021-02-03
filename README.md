@@ -147,4 +147,4 @@ mejoras en el renderizado de los formularios y redirección del usuario en Landi
 - [:white_check_mark:] v1.5.0 -> barra de búsqueda de perfiles en la comunidad y mejora de la página de contacto
 ![v1.5.0_contact](screenshots/v1.5.0_contact.png)
 ![v1.5.0_search](screenshots/v1.5.0_search.png)
-- [:white_check_mark:] v1.5.1 -> mejoras visuales, cambio a display absolute del footer y terminada v2 de la doc.
+- [:white_check_mark:] v1.5.1 -> mejoras visuales y terminada v2 de la doc.
