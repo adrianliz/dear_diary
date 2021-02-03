@@ -30,6 +30,14 @@
   padding: 0;
 }
 
+.box-options ul:hover, .box-options ul:focus {
+  background-color: #92d5ff;
+  box-shadow: none;
+  transform: translate3d(4px, 4px, 0);
+  transition: all 0.1s ease;
+  outline: none;
+}
+
 .sticky-note {
   position: relative;
   color: #121212;

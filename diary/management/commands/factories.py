@@ -15,6 +15,8 @@ class UserFactory(DjangoModelFactory):
     username = factory.Faker("user_name")
     email = factory.Faker("email")
     password = factory.PostGenerationMethodCall('set_password', 'password')
+    last_login = factory.Faker(
+        "date_time", tzinfo=timezone.get_current_timezone())
 
 
 class MoodFactory(DjangoModelFactory):

@@ -9,25 +9,33 @@ const currentTheme = localStorage.getItem("theme");
 
 if (currentTheme == DARK_THEME) {
   theme.href = DARK_THEME_URL;
-  toggleIcon.className = "fas fa-2x fa-sun text-warning";
-} else {
-  theme.href = LIGHT_THEME_URL;
-  toggleIcon.className = "fas fa-2x fa-moon text-black";
-}
 
-toggleIcon.addEventListener("click", () => {
-  let newTheme;
-  const currentTheme = localStorage.getItem("theme");
-
-  if (currentTheme == DARK_THEME) {
-    theme.href = LIGHT_THEME_URL;
-    newTheme = LIGHT_THEME;
-    toggleIcon.className = "fas fa-2x fa-moon text-dark";
-  } else {
-    theme.href = DARK_THEME_URL;
-    newTheme = DARK_THEME;
+  if (toggleIcon != null) {
     toggleIcon.className = "fas fa-2x fa-sun text-warning";
   }
+} else {
+  theme.href = LIGHT_THEME_URL;
 
-  localStorage.setItem("theme", newTheme);
-})
+  if (toggleIcon != null) {
+    toggleIcon.className = "fas fa-2x fa-moon text-black";
+  }
+}
+
+if (toggleIcon != null) {
+  toggleIcon.addEventListener("click", () => {
+    let newTheme;
+    const currentTheme = localStorage.getItem("theme");
+
+    if (currentTheme == DARK_THEME) {
+      theme.href = LIGHT_THEME_URL;
+      newTheme = LIGHT_THEME;
+      toggleIcon.className = "fas fa-2x fa-moon text-dark";
+    } else {
+      theme.href = DARK_THEME_URL;
+      newTheme = DARK_THEME;
+      toggleIcon.className = "fas fa-2x fa-sun text-warning";
+    }
+
+    localStorage.setItem("theme", newTheme);
+  })
+}

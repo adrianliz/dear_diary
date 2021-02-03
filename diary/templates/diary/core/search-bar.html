@@ -5,7 +5,12 @@
     <input id="searchBar" class="form-control" type="search" placeholder="Search">
   </div>
   <div class="col">
-    <a id="searchHref" class="btn btn-outline-success">Search</a>
+    <div class="row">
+      <a id="searchHref" class="btn btn-outline-success">Search</a>
+    </div>
+  </div>
+  <div class="col text-right">
+    <a class="btn btn-outline-info" href="{% url 'diary:community' %}">Refresh</a>
   </div>
 </div>
 
