@@ -4,7 +4,6 @@ recopilar lo que les pasa día a día y que estos puedan puntuar sus estados o "
 
 ## Estado
 ```diff
-+ [En desarrollo]
 + [En producción]
 ```
 -> dear-diary.iw (añadir a /etc/hosts la entrada: `155.210.71.69 dear-diary.iw`)
@@ -148,3 +147,7 @@ mejoras en el renderizado de los formularios y redirección del usuario en Landi
 ![v1.5.0_contact](screenshots/v1.5.0_contact.png)
 ![v1.5.0_search](screenshots/v1.5.0_search.png)
 - [:white_check_mark:] v1.5.1 -> mejoras visuales y terminada v2 de la doc.
+
+## Idea original
+
+[Raúl Javierre](https://github.com/rauljavierre)
