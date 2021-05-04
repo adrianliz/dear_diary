@@ -2,14 +2,6 @@
 dear_diary pretende ser un diario digital en formato de aplicación web, el cual permita a sus distintos usuarios
 recopilar lo que les pasa día a día y que estos puedan puntuar sus estados o "moods"
 
-## Estado
-```diff
-+ [En producción]
-```
--> dear-diary.iw (añadir a /etc/hosts la entrada: `155.210.71.69 dear-diary.iw`)
-
--> ¡dear-diary disponible en [dear-diary.ml](http://dear-diary.ml)!
-
 ## Cómo funciona la configuración
 Se ha hecho uso del módulo [django-environ](https://django-environ.readthedocs.io/en/latest/)
 
